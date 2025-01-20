@@ -35,9 +35,6 @@ mlxmake :
 mlxclean :
 	cd ./MLX && $(MAKE) clean
 
-mlxfclean :
-	cd ./MLX && $(MAKE) fclean
-
 mlxre :
 	cd ./MLX && &(MAKE) re
 
