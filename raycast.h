@@ -21,15 +21,14 @@ typedef struct s_raycast
 
 typedef struct s_data
 {
-
-} t_data;
-
-typedef struct s_mlx
-{
 	void *mlx;
 	void *win;
 	void *img;
+	char *addr;
+	int bits_per_pixel;
+	int line_length;
+	int endian;
 	
-} t_mlx;
+} t_data;
 
 #endif
