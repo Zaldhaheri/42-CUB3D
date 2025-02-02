@@ -7,7 +7,11 @@
 
 # define S_W 2000 // screen  width
 # define S_H 1000 // Screen height
-# define FOV 60 //FOV
+# define FOV 60 // FOV
+
+// Colors
+# define C_FLOOR 0x1A9D0D
+# define C_CEILING 0x335DFF
 
 typedef struct s_player
 {
