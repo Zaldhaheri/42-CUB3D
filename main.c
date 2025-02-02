@@ -81,17 +81,3 @@ int main()
 	mlx_loop(data.mlx);
 	return (0);
 }
-
-
-// int main()
-// {
-//     t_data data;
-
-//     init(&data);
-	
-//     while ()
-//     my_mlx_pixel_put(&data, 5, 5, 0x00FF0000);
-//     mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
-//     mlx_loop(data.mlx);
-//     return (0);
-// }
