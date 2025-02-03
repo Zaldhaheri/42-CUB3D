@@ -1,5 +1,40 @@
 #include "raycast.h"
 
+/*
+ JUST FOR TESTING
+*/
+
+#define MAP_WIDTH 10
+#define MAP_HEIGHT 10
+
+int worldMap[MAP_HEIGHT][MAP_WIDTH] = {
+    {1,1,1,1,1,1,1,1,1,1},
+    {1,0,0,0,0,0,0,0,0,1},
+    {1,0,1,1,0,0,0,1,0,1},
+    {1,0,1,0,0,0,0,1,0,1},
+    {1,0,1,0,0,0,0,1,0,1},
+    {1,0,1,0,0,0,0,1,0,1},
+    {1,0,0,0,0,1,1,0,0,1},
+    {1,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,0,0,1},
+    {1,1,1,1,1,1,1,1,1,1}
+};
+
+// init to test my raycast (so i dont wait for parsing)
+void init_player(t_player *player)
+{
+	player->pos_x = 5.0;
+	player->pos_y = 5.0;
+	player->dir_x = -1;
+	player->dir_y = 0;
+	player->plane_x = 0;
+	player->plane_y = 0.6;
+}
+
+/*
+  END OF TESTING
+*/
+
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -21,25 +56,17 @@ void init(t_data *data)
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length, &data->endian);
 }
 
-void set_FC(t_data *data)
+void raycast(t_ray *ray, t_player *player)
 {
-	int y;
-	int	x;
 
-	y = 0;
-	while (y < S_H)
-	{
-		x = 0;
-		while (x < S_W)
-		{
-			if (y < S_H / 2)
-				my_mlx_pixel_put(data, x, y, C_CEILING);
-			else
-				my_mlx_pixel_put(data, x, y, C_FLOOR);
-			x++;
-		}
-		y++;
-	}
+}
+
+void game_start(t_data *data)
+{
+	init_player(data->plr);
+	raycast(data->ray, data->plr);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	mlx_loop(data->mlx);
 }
 
 int main()
@@ -47,8 +74,6 @@ int main()
 	t_data data;
 
 	init(&data);
-	set_FC(&data);
-	mlx_put_image_to_window(data.mlx, data.win, data.img, 0, 0);
-	mlx_loop(data.mlx);
+
 	return (0);
 }

@@ -5,7 +5,7 @@
 #include <math.h>
 #include <stdio.h>
 
-# define S_W 2000 // screen  width
+# define S_W 1800 // screen  width
 # define S_H 1000 // Screen height
 # define FOV 60 // FOV
 
@@ -16,26 +16,29 @@
 // Variables with player
 typedef struct s_player
 {
-	int plr_pxl_x;
-	int plr_pxl_y;
-	
+	double pos_x;
+	double pos_y;
+	double dir_x;
+	double dir_y;
+	double plane_x;
+	double plane_y;
 } t_player;
 
 // Variables with rays
 typedef struct s_ray
 {
-	double ray_distance;
-	double ray_angle;
-	int flag;
+	double dir_x;
+	double dir_y;
+	double deltadst_x;
+	double deltadst_y;
+	double sidedst_x;
+	double sidedst_y;
+	int step_x;
+	int step_y;
+	int map_x;
+	int map_y;
+	int side;
 } t_ray;
-
-// Variables with maps (max)
-typedef struct s_map
-{
-	char **map_arr;
-	int map_w;
-	int map_h;
-} t_map;
 
 // Main struct
 typedef struct s_data
@@ -49,7 +52,6 @@ typedef struct s_data
 	int			endian;
 	t_player	*plr;
 	t_ray		*ray;
-	t_map		*map;
 } t_data;
 
 #endif
