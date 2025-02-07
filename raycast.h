@@ -4,6 +4,7 @@
 #include "MLX/mlx.h"
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 # define S_W 1800 // screen  width
 # define S_H 1000 // Screen height
@@ -27,12 +28,14 @@ typedef struct s_player
 // Variables with rays
 typedef struct s_ray
 {
+	int pxl_x;
 	double dir_x;
 	double dir_y;
 	double deltadst_x;
 	double deltadst_y;
 	double sidedst_x;
 	double sidedst_y;
+	double cam_x;
 	int step_x;
 	int step_y;
 	int map_x;
