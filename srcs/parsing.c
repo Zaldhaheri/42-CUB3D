@@ -1,0 +1,1 @@
+void	parsing(char *path, t_game *game)
