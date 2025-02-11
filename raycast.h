@@ -8,8 +8,8 @@
 #include <string.h>
 #include <unistd.h>
 
-# define S_W 1000 // screen  width
-# define S_H 700 // Screen height
+# define S_W 1800 // screen  width
+# define S_H 1000 // Screen height
 # define FOV 60 //FOV
 
 # define NORTH 2
@@ -51,6 +51,17 @@ typedef struct s_ray
 	int side;
 	int hit;
 } t_ray;
+
+typedef struct s_parse 
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		f[3];
+	int		c[3];
+	char	**map;
+} t_parse;
 
 // Main struct
 typedef struct s_data
