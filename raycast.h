@@ -8,9 +8,9 @@
 #include <string.h>
 #include <unistd.h>
 
-# define S_W 1800 // screen  width
-# define S_H 1000 // Screen height
-# define FOV 60 // FOV
+# define S_W 1000 // screen  width
+# define S_H 700 // Screen height
+# define FOV 60 //FOV
 
 # define NORTH 2
 # define SOUTH 3
