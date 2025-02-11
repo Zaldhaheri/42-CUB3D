@@ -17,6 +17,7 @@
 # define EAST 4
 # define WEST 5
 
+
 // Colors
 # define C_FLOOR 0x1A9D0D
 # define C_CEILING 0x335DFF
@@ -64,5 +65,10 @@ typedef struct s_data
 	t_player	*plr;
 	t_ray		*ray;
 } t_data;
+
+void raycast(t_data *data, t_ray *ray);
+int rendering(void *param);
+void check_steps(t_ray *ray, t_player *player);
+void init_ray(t_ray *ray, t_player *player);
 
 #endif
