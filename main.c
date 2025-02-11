@@ -84,15 +84,15 @@ void check_steps(t_ray *ray, t_player *player) //(origin point 0,0 is top left c
 		ray->step_x = -1;
 		ray->sidedst_x = (player->pos_x - ray->map_x);
 	}
-	if (ray->dir_y > 0) //move up
+	if (ray->dir_y < 0) //move up
 	{
 		ray->step_y = -1;
-		ray->sidedst_y = (ray->map_y + 1.0 - player->pos_y);
+		ray->sidedst_y = (player->pos_y - ray->map_y);
 	}
 	else //move down
 	{
 		ray->step_y = 1;
-		ray->sidedst_y = (player->pos_y - ray->map_y);
+		ray->sidedst_y = (ray->map_y + 1.0 - player->pos_y);
 	}
 }
 
@@ -105,13 +105,20 @@ void the_DDA(t_ray *ray)
 		{
 			ray->sidedst_x += ray->delta_x;
 			ray->map_x += ray->step_x;
-			ray->side = 0; // 0 meaning vertical wall
+			if (ray->step_x == -1)
+				ray->side = EAST;
+			else
+				ray->side = WEST;
 		}
 		else
 		{
 			ray->sidedst_y += ray->delta_y;
 			ray->map_y += ray->step_y;
-			ray->side = 1;
+			ray->side = 1; // 1 meaning horizontal wall
+			if (ray->step_y == -1)
+				ray->side = NORTH;
+			else
+				ray->side = SOUTH;
 		}
 		if (worldMap[ray->map_y][ray->map_x] > 0)
 			ray->hit = 1;

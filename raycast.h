@@ -12,6 +12,11 @@
 # define S_H 1000 // Screen height
 # define FOV 60 // FOV
 
+# define NORTH 2
+# define SOUTH 3
+# define EAST 4
+# define WEST 5
+
 // Colors
 # define C_FLOOR 0x1A9D0D
 # define C_CEILING 0x335DFF
