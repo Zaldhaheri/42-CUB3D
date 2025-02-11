@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: mbabayan <mbabayan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 11:50:49 by mbabayan          #+#    #+#             */
-/*   Updated: 2024/05/19 14:03:34 by mbabayan         ###   ########.fr       */
+/*   Updated: 2023/11/15 11:50:53 by mbabayan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	add_string_to_list(char **result, char const *string,
 	{
 		letter_count = 0;
 		while (string[index + letter_count] && string[index
-				+ letter_count] != separator)
+			+ letter_count] != separator)
 			letter_count++;
 		if (letter_count > 0)
 		{
@@ -66,8 +66,8 @@ static void	add_string_to_list(char **result, char const *string,
 
 char	**ft_split(char const *s, char c)
 {
-	int		count;
-	char	**result;
+	int count;
+	char **result;
 
 	if (!s)
 		return (NULL);

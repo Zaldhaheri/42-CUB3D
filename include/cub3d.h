@@ -16,6 +16,12 @@
 
 # define WALL				'1'
 # define FLOOR				'0'
+# define NO 				'NO'
+# define SO 				'SO'
+# define WE 				'WE'
+# define EA 				'EA'
+# define C					'C'
+# define F					'F'
 # define EF					EXIT_FAILURE
 # define ES					EXIT_SUCCESS
 
@@ -52,16 +58,7 @@ typedef struct s_parsemap
 /*
 	Func Prototypes
 */
-void	init_map(t_parsemap **map);
-void	image_check(void);
-void	path_validation(char *path, t_parsemap **map);
-void	retrieve_map(char *path, t_parsemap **map);
-void	free_maps(char **main_map, char **map_copy, t_parsemap *map);
-void	check_map_size(t_parsemap **map);
-void	check_map_borders(t_parsemap **map);
-int		check_top_bottom(char *row, char target);
-void	check_map_elements(t_parsemap **map);
-void	check_character(char c, t_parsemap **map);
-void	check_element_amount(t_parsemap **map);
+int parse_cub(const char *path, t_parsemap *game);
+
 
 #endif

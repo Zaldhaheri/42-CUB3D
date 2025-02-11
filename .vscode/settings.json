@@ -1,8 +1,0 @@
-{
-	"files.associations": {
-		"*.sqlbook": "sql",
-		"*.ndjson": "jsonl",
-		"*.dbclient-js": "javascript",
-		"cub3d.h": "c"
-	}
-}

@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbabayan <mbabayan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 18:19:27 by mbabayan          #+#    #+#             */
-/*   Updated: 2023/11/13 18:19:30 by mbabayan         ###   ########.fr       */
+/*   Created: 2023/11/20 12:33:17 by mbabayan          #+#    #+#             */
+/*   Updated: 2023/11/20 12:33:25 by mbabayan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strtrim(char const *s1, char const *set)
+/*
+ * Returns the last element of the list.
+ * If the list is empty, returns NULL.
+ * loop through the list until the last element is reached.
+ */
+t_list	*ft_lstlast(t_list	*lst)
 {
-	size_t	index;
+	if (!lst)
+		return (NULL);
+	while (lst -> next)
+		lst = lst -> next;
+	return (lst);
 
-	index = 0;
-	while (ft_strchr(set, s1[index]) && s1[index])
-		index++;
-	s1 = &s1[index];
-	index = ft_strlen(s1) - 1;
-	while (ft_strchr(set, s1[index]) && index > 0)
-		index--;
-	return (ft_substr(s1, 0, index + 1));
 }

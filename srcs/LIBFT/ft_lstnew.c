@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbabayan <mbabayan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 18:19:27 by mbabayan          #+#    #+#             */
-/*   Updated: 2023/11/13 18:19:30 by mbabayan         ###   ########.fr       */
+/*   Created: 2023/11/19 02:23:42 by mbabayan          #+#    #+#             */
+/*   Updated: 2023/11/19 02:23:46 by mbabayan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strtrim(char const *s1, char const *set)
+/*
+ * function creates a new list element of type t_list.
+ * It allocates memory for the new element, sets its content to the passed
+ * content argument, and initializes its next pointer to NULL.
+ */
+t_list *ft_lstnew(void *content)
 {
-	size_t	index;
+	t_list *new_list;
 
-	index = 0;
-	while (ft_strchr(set, s1[index]) && s1[index])
-		index++;
-	s1 = &s1[index];
-	index = ft_strlen(s1) - 1;
-	while (ft_strchr(set, s1[index]) && index > 0)
-		index--;
-	return (ft_substr(s1, 0, index + 1));
+	new_list = (t_list *)malloc(sizeof(t_list));
+	if (!new_list)
+		return (NULL);
+	new_list -> content = content;
+	new_list -> next = NULL;
+	return (new_list);
 }

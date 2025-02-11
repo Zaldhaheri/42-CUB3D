@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbabayan <mbabayan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 18:19:27 by mbabayan          #+#    #+#             */
-/*   Updated: 2023/11/13 18:19:30 by mbabayan         ###   ########.fr       */
+/*   Created: 2023/11/04 14:19:54 by mbabayan          #+#    #+#             */
+/*   Updated: 2023/11/12 14:03:00 by mbabayan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strtrim(char const *s1, char const *set)
+// ft_strlcpy copies up to dstsize - 1 characters from the string src to dst.
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	index;
 
+	if (dstsize == 0)
+		return (ft_strlen(src));
 	index = 0;
-	while (ft_strchr(set, s1[index]) && s1[index])
+	while (src[index] && index < dstsize - 1)
+	{
+		dst[index] = src[index];
 		index++;
-	s1 = &s1[index];
-	index = ft_strlen(s1) - 1;
-	while (ft_strchr(set, s1[index]) && index > 0)
-		index--;
-	return (ft_substr(s1, 0, index + 1));
+	}
+	dst[index] = '\0';
+	return (ft_strlen(src));
 }

@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbabayan <mbabayan@student.42abudhabi.ae>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 18:19:27 by mbabayan          #+#    #+#             */
-/*   Updated: 2023/11/13 18:19:30 by mbabayan         ###   ########.fr       */
+/*   Created: 2023/11/13 01:34:40 by mbabayan          #+#    #+#             */
+/*   Updated: 2023/11/13 11:57:57 by mbabayan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strtrim(char const *s1, char const *set)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	size_t	index;
 
 	index = 0;
-	while (ft_strchr(set, s1[index]) && s1[index])
+	while (n > index)
+	{
+		if (((unsigned char *)s1)[index] != ((unsigned char *)s2)[index])
+			return (((unsigned char *)s1)[index]
+				- ((unsigned char *)s2)[index]);
 		index++;
-	s1 = &s1[index];
-	index = ft_strlen(s1) - 1;
-	while (ft_strchr(set, s1[index]) && index > 0)
-		index--;
-	return (ft_substr(s1, 0, index + 1));
+	}
+	return (0);
 }

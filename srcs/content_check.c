@@ -1,0 +1,59 @@
+#include "./include/cub3d.h"
+
+int	check_indents(int *identifier_count)
+{
+	if (identifier_count[0] != 1)
+		return (write(1, "Error\nInvalid floor identifiers\n", 42), 0);
+	if (identifier_count[1] != 1)
+		return (write(1, "Error\nInvalid ceiling identifiers\n", 44), 0);
+	if (identifier_count[2] != 1)
+		return (write(1, "Error\nInvalid number of NO identifiers\n", 39), 0);
+	if (identifier_count[3] != 1)
+		return (write(1, "Error\nInvalid number of SO identifiers\n", 39), 0);
+	if (identifier_count[4] != 1)
+		return (write(1, "Error\nInvalid number of WE identifiers\n", 39), 0);
+	if (identifier_count[5] != 1)
+		return (write(1, "Error\nInvalid number of EA identifiers\n", 39), 0);
+	return (1);
+}
+
+int	validate_idents(char *line, int *identifier_count)
+{
+	if (line[0] == 'F' && line[1] == ' ')
+		identifier_count[0]++;
+	else if (line[0] == 'C' && line[1] == ' ')
+		identifier_count[1]++;
+	else if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
+		identifier_count[2]++;
+	else if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
+		identifier_count[3]++;
+	else if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
+		identifier_count[4]++;
+	else if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
+		identifier_count[5]++;
+	else
+		return (0);
+	return (1);
+}
+
+int	check_content(char **content)
+{
+	int		i;
+	char	*line;
+	int		identifier_count[6];
+
+	i = 0;
+	if (content[0] == NULL)
+		return (write(1, "Error\nEmpty file\n", 17), 0);
+	ft_memset(identifier_count, 0, sizeof(int) * 6);
+	while (content[i] != NULL)
+	{
+		line = ft_strtrim(content[i], " \t\n");
+		if (line[0] && validate_idents(line, identifier_count) == 0)
+			return (write(1, "Error\nInvalid identifier\n", 25), free(line), 0);
+		free(line);
+	}
+	if (check_idents(identifier_count) == 0)
+		return (0);
+	return (1);
+}
