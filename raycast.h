@@ -17,10 +17,17 @@
 # define EAST 4
 # define WEST 5
 
-
 // Colors
 # define C_FLOOR 0x1A9D0D
 # define C_CEILING 0x335DFF
+
+typedef struct s_line
+{
+	int x;
+	int y;
+	int y0;
+	int y1;
+} t_line;
 
 // Variables with player
 typedef struct s_player
@@ -44,10 +51,14 @@ typedef struct s_ray
 	double sidedst_x;
 	double sidedst_y;
 	double cam_x;
+	double wall_dst;
 	int step_x;
 	int step_y;
 	int map_x;
 	int map_y;
+	int line_height;
+	int draw_s;
+	int draw_e;
 	int side;
 	int hit;
 } t_ray;
@@ -75,11 +86,16 @@ typedef struct s_data
 	int			endian;
 	t_player	*plr;
 	t_ray		*ray;
+	t_line		*line;
 } t_data;
 
-void raycast(t_data *data, t_ray *ray);
 int rendering(void *param);
-void check_steps(t_ray *ray, t_player *player);
-void init_ray(t_ray *ray, t_player *player);
+void raycast(t_data *data, t_ray *ray);
+void paint(t_data *data, t_ray *ray, t_player *player, t_line *line);
+
+#define MAP_WIDTH 10
+#define MAP_HEIGHT 10
+
+extern int worldMap[MAP_HEIGHT][MAP_WIDTH];
 
 #endif

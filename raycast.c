@@ -14,7 +14,7 @@ void init_ray(t_ray *ray, t_player *player)
 
 void check_steps(t_ray *ray, t_player *player) //(origin point 0,0 is top left corner)
 {
-	if (ray->dir_x > 0) //move right
+	if (ray->dir_x >= 0) //move right
 	{
 		ray->step_x = 1;
 		ray->sidedst_x = (ray->map_x + 1.0 - player->pos_x);
@@ -36,38 +36,67 @@ void check_steps(t_ray *ray, t_player *player) //(origin point 0,0 is top left c
 	}
 }
 
-int rendering(void *param)
-{
-	t_data *data;
-	t_ray *ray;
 
-	data = (t_data *) param;
-	ray = malloc(sizeof(t_ray));
-	if (!ray)
+
+void getWallSide(t_ray *ray)
+{
+	if (ray->sidedst_x < ray->sidedst_y)
 	{
-		printf("malloc error ray\n");
-		return (1);
+		ray->sidedst_x += ray->delta_x;
+		ray->map_x += ray->step_x;
+		if (ray->step_x == -1)
+			ray->side = EAST;
+		else
+			ray->side = WEST;
 	}
-	memset(ray, 0, sizeof(t_ray)); //temp function
-	ray->pxl_x = 0;
-	while (ray->pxl_x < S_W - 1) //loops over every pixel in width
+	else
 	{
-		raycast(data, ray);
-		my_mlx_pixel_put(data, ray->pxl_x, 100, 0xAF0F0); // just to check
+		ray->sidedst_y += ray->delta_y;
+		ray->map_y += ray->step_y;
+		if (ray->step_y == -1)
+			ray->side = SOUTH;
+		else
+			ray->side = NORTH;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-	free(ray);
-	return (0);
+}
+
+void the_DDA(t_ray *ray)
+{
+	while(!ray->hit)
+	{
+		getWallSide(ray);
+		if (worldMap[ray->map_y][ray->map_x] == 1)
+			ray->hit = 1;
+	}
+}
+
+void height_Scale(t_ray *ray, t_player *player)
+{
+	if (ray->side == EAST || ray->side == WEST)
+		ray->wall_dst = ((double) ray->map_x - player->pos_x + (1 - ray->step_x) / 2) / ray->dir_x;
+	else
+		ray->wall_dst = ((double) ray->map_y - player->pos_y + (1 - ray->step_y) / 2) / ray->dir_y;
+	ray->line_height = S_H / ray->wall_dst;
+	ray->draw_s = -ray->line_height / 2 + ((S_H / 2) * player->plane_y);
+	if (ray->draw_s <= 0)
+		ray->draw_s = 0;
+	ray->draw_e = ray->line_height / 2 + ((S_H / 2) * player->plane_y);
+	if (ray->draw_e >= S_W)
+		ray->draw_e = S_W - 1;
 }
 
 void raycast(t_data *data, t_ray *ray)
 {
 	t_player *player;
+	t_line	*line;
 
 	player = data->plr;
+	line = data->line;
 	init_ray(ray, player);
 	check_steps(ray, player);
 	the_DDA(ray);
+	height_Scale(ray, player);
+	paint(data, ray, player, line);
 
 	ray->pxl_x++;
 }

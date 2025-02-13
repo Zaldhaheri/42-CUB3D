@@ -1,6 +1,6 @@
 NAME = cub3d
 
-SRC = main.c
+SRC = main.c raycast.c
 
 OBJ = $(SRC:.c=.o)
 
