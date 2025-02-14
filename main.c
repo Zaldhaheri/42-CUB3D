@@ -1,6 +1,6 @@
 #include "./include/cub3d.h"
 
-int	parse_cub(const char *path, t_parsemap *game)
+int	parse_cub(const char *path, t_data *game)
 {
 	char	**content;
 	int		i;
@@ -14,13 +14,13 @@ int	parse_cub(const char *path, t_parsemap *game)
 
 int	main(int argc, char **argv)
 {
-	t_parsemap	game;
+	t_data	game;
 
 	if (argc != 2)
 		(write(1, "Error\nUsage: ./cub3d <path_to_cub_file>\n", 35), exit(EF));
 	if (ft_strnstr(argv[1], ".cub", 5))
 		(write(1, "Error\nInvalid file extension\n", 30), exit(EF));
-	ft_memset(&game, 0, sizeof(t_parsemap));
+	ft_memset(&game.parsing, 0, sizeof(t_parse));
 	if (!parse_cub(argv[1], &game))
 		return (write(1, "Error\nParsing failed\n", 22), exit(EF), -1);
 }

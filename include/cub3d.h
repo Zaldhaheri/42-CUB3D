@@ -1,3 +1,4 @@
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -9,6 +10,10 @@
 # include "../srcs/LIBFT/libft.h"
 # include <stdio.h>
 # include <fcntl.h>
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 /*
 	Defines
@@ -28,37 +33,85 @@
 /*
 	Structs
 */
-typedef enum keys
-{
-	UP = 126,
-	DOWN = 125,
-	RIGHT = 124,
-	LEFT = 123,
-	W = 13,
-	A= 0,
-	S = 1,
-	D = 2,
-	ESC = 53
-}	t_keys;
 
-typedef struct s_parsemap
+# define S_W 1800 // screen  width
+# define S_H 1000 // Screen height
+# define FOV 60 //FOV
+
+# define NORTH 2
+# define SOUTH 3
+# define EAST 4
+# define WEST 5
+
+
+// Colors
+# define C_FLOOR 0x1A9D0D
+# define C_CEILING 0x335DFF
+
+// Variables with player
+typedef struct s_player
 {
-	int		fd;
-	int		rows;
-	int		collumns;
-	int		empty_line;
-	char	*line;
-	char	**map_main;
-	char	**map_copy;
-	int		player;
-	int		x;
-	int		y;
-}	t_parsemap;
+	double pos_x;
+	double pos_y;
+	double dir_x;
+	double dir_y;
+	double plane_x;
+	double plane_y;
+} t_player;
+
+// Variables with rays
+typedef struct s_ray
+{
+	int pxl_x;
+	double dir_x;
+	double dir_y;
+	double delta_x;
+	double delta_y;
+	double sidedst_x;
+	double sidedst_y;
+	double cam_x;
+	int step_x;
+	int step_y;
+	int map_x;
+	int map_y;
+	int side;
+	int hit;
+} t_ray;
+
+typedef struct s_parse 
+{
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		f[3];
+	int		c[3];
+	char	**map;
+} t_parse;
+
+// Main struct
+typedef struct s_data
+{
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	t_player	*plr;
+	t_ray		*ray;
+	t_parse		*parsing;
+} t_data;
 
 /*
 	Func Prototypes
 */
-int parse_cub(const char *path, t_parsemap *game);
+int		check_content(char **content);
+int 	color_and_texture(t_parse *game, char **content);
+
+int		free_darray(char **darray);
+void	trim_end(char *string, char *set);
 
 
 #endif
