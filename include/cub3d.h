@@ -51,12 +51,14 @@
 // Variables with player
 typedef struct s_player
 {
-	double pos_x;
-	double pos_y;
-	double dir_x;
-	double dir_y;
-	double plane_x;
-	double plane_y;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	int		player_flag;
+	int		orientation;
 } t_player;
 
 // Variables with rays
@@ -84,9 +86,11 @@ typedef struct s_parse
 	char	*so;
 	char	*we;
 	char	*ea;
-	int		f[3];
-	int		c[3];
+	int		f;
+	int		c;
 	char	**map;
+	int		map_height;
+	int		map_width;
 } t_parse;
 
 // Main struct
@@ -109,9 +113,15 @@ typedef struct s_data
 */
 int		check_content(char **content);
 int 	color_and_texture(t_parse *game, char **content);
+int		parse_map(t_data *game, char **content, int start);
 
 int		free_darray(char **darray);
 void	trim_end(char *string, char *set);
+int		string_compare(const char *string1, const char *string2);
+char	**split_color_channels(char *line);
+int		atoi_colors(t_data *game, char **colors, char texture);
+int		check_for_map(char **file_data);
+void	reverse_map(char **map);
 
 
 #endif

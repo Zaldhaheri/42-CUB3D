@@ -9,7 +9,8 @@ int	init_textures(char *file, t_data *game, unsigned int texture[64][64])
 	int		jindex;
 
 	if (ft_strncmp(file + ft_strlen(file) - 4, ".xpm", 5))
-		return (write(1,"Error: Texture extension should be '.xpm'.\n", 44), 0);
+		return (write(1, "Error: Texture extension should be '.xpm'.\n", 44),
+			0);
 	image = NULL;
 	image = game_xpm_file_to_image(game->mlx, file, info + 1, info + 2);
 	if (!image)
@@ -20,15 +21,16 @@ int	init_textures(char *file, t_data *game, unsigned int texture[64][64])
 	{
 		jindex = -1;
 		while (++jindex < 64)
-			texture[jindex][index] = *(unsigned int *)(address + index * info[1] + jindex * (info[0] / 8));
+			texture[jindex][index] = *(unsigned int *)(address + index * info[1]
+					+ jindex * (info[0] / 8));
 	}
 	mlx_destroy_image(game->mlx, image);
 	return (1);
 }
 
-int setting_textures(t_data *game, char **part)
+int	setting_textures(t_data *game, char **part)
 {
-	char *path;
+	char	*path;
 
 	if ((!part[1] || part[2]) && (!ft_strncmp(part[0], "NO", 3)
 			|| !ft_strncmp(part[0], "SO", 3) || !ft_strncmp(part[0], "WE", 3)
@@ -46,7 +48,7 @@ int setting_textures(t_data *game, char **part)
 	return (1);
 }
 
-int color_and_texture(t_data *game, char **content)
+int	color_and_texture(t_data *game, char **content)
 {
 	int index;
 	char **part;
@@ -62,7 +64,8 @@ int color_and_texture(t_data *game, char **content)
 			continue ;
 		if (!setting_textures(game, part))
 			return (free_darray(part), 0);
-		if ((strcmp(part[0], "F") || strcmp(part[0], "C")) && !setting_color(game, part))
+		if ((string_compare(part[0], "F") || string_compare(part[0], "C"))
+			&& !setting_color(game, part))
 			return (free_darray(part), 0);
 	}
 	free_darray(part);

@@ -3,13 +3,18 @@
 int	parse_cub(const char *path, t_data *game)
 {
 	char	**content;
-	int		i;
+	int		index;
 
 	content = extract_content(path);
 	if (!content)
 		return (write(1, "Error\nInvalid file\n", 20), 0);
 	if (!check_content(content) || !check_texturing(content, game))
-		return (/* Add freeing of content here */ 0);
+		return (free_darray(content), 0);
+	index = check_for_map(content);
+	if (!index || !parse_map(game, content + index, index))
+		return (free_darray(content), 0);
+	free_darray(content);
+	
 }
 
 int	main(int argc, char **argv)
