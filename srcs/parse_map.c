@@ -1,5 +1,34 @@
 #include "../include/cub3d.h"
 
+int enclosed_check(t_data *game)
+{
+	int	index;
+	int	jindex;
+
+	index = 0;
+	while (index < game->parsing->map_height)
+	{
+		jindex = 0;
+		while (jindex < game->parsing->map_width)
+		{
+			if (game->parsing->map[index][jindex] == '0')
+			{
+				if (index == 0 || index == game->parsing->map_height - 1
+					|| jindex == 0 || jindex == game->parsing->map_width - 1)
+					return (write(1, "Error: Map not enclosed\n", 24), 0);
+				if (game->parsing->map[index - 1][jindex] == ' '
+					|| game->parsing->map[index + 1][jindex] == ' '
+					|| game->parsing->map[index][jindex - 1] == ' '
+					|| game->parsing->map[index][jindex + 1] == ' ')
+					return (write(1, "Error: Map not enclosed\n", 24), 0);
+			}
+			jindex++;
+		}
+		index++;
+	}
+	return (1);
+}
+
 int	create_map(t_data *game, char **map)
 {
 	int	index;
@@ -15,7 +44,7 @@ int	create_map(t_data *game, char **map)
 	game->parsing->map = ft_calloc((game->parsing->map_height + 1),
 			sizeof(char *));
 	if (!game->parsing->map)
-		return (write(1, "Error: Malloc failed\n", 22), 0);
+		return (write(1, "Error: Couldn't Allocate for map\n", 34), 0);
 	index = -1;
 	while (map[++index])
 	{

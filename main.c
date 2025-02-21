@@ -14,7 +14,7 @@ int	parse_cub(const char *path, t_data *game)
 	if (!index || !parse_map(game, content + index, index))
 		return (free_darray(content), 0);
 	free_darray(content);
-	
+	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 		(write(1, "Error\nUsage: ./cub3d <path_to_cub_file>\n", 35), exit(EF));
 	if (ft_strnstr(argv[1], ".cub", 5))
 		(write(1, "Error\nInvalid file extension\n", 30), exit(EF));
-	ft_memset(&game.parsing, 0, sizeof(t_parse));
+	ft_memset(&game, 0, sizeof(t_data));
 	if (!parse_cub(argv[1], &game))
-		return (write(1, "Error\nParsing failed\n", 22), exit(EF), -1);
+		(free(&game),write(1, "Error\nParsing failed\n", 22), exit(EF));
 }
