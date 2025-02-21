@@ -28,4 +28,6 @@ int	main(int argc, char **argv)
 	ft_memset(&game, 0, sizeof(t_data));
 	if (!parse_cub(argv[1], &game))
 		(free(&game),write(1, "Error\nParsing failed\n", 22), exit(EF));
+
+	// Logic for the game here!!!!
 }
