@@ -1,41 +1,40 @@
 NAME = cub3d
 
-SRC = main.c raycast.c
+SRC = main.c raycast.c srcs/color_check.c srcs/content_check.c srcs/parse_map.c srcs/texturing_check.c srcs/utils_2.c srcs/utils.c
 
 OBJ = $(SRC:.c=.o)
 
 CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
-MLX = MLX
+MLX = srcs/MLX
+LIBFT = srcs/LIBFT
 
-LINK = -lmlx -framework OpenGL -framework AppKit -L$(MLX)
+LINK = -L$(MLX) -lmlx -framework OpenGL -framework AppKit -L$(LIBFT) -lft
 
 COMPILE = $(CC) $(CFLAGS) $(LINK)
 
-all : $(NAME)
+all: $(NAME)
 
-$(NAME) : $(OBJ)
+$(NAME): $(OBJ) $(MLX)/libmlx.a $(LIBFT)/libft.a
 	$(COMPILE) $(OBJ) -o $(NAME)
 
 $(MLX)/libmlx.a:
 	$(MAKE) -C $(MLX)
 
-clean :
+$(LIBFT)/libft.a:
+	$(MAKE) -C $(LIBFT)
+
+clean:
 	rm -f $(OBJ)
+	$(MAKE) -C $(MLX) clean
+	$(MAKE) -C $(LIBFT) clean
 
-fclean : clean
+fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C $(MLX) fclean
+	$(MAKE) -C $(LIBFT) fclean
 
-re : fclean all
+re: fclean all
 
-mlxmake :
-	cd ./MLX && $(MAKE) all
-
-mlxclean :
-	cd ./MLX && $(MAKE) clean
-
-mlxre :
-	cd ./MLX && &(MAKE) re
-
-.PHONY : all clean fclean re
+.PHONY: all clean fclean re
