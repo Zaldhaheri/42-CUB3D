@@ -1,4 +1,4 @@
-#include "raycast.h"
+#include "./include/cub3d.h"
 
 void init_ray(t_ray *ray, t_player *player)
 {
@@ -60,12 +60,12 @@ void getWallSide(t_ray *ray)
 	}
 }
 
-void the_DDA(t_ray *ray)
+void the_DDA(t_data *data, t_ray *ray)
 {
 	while(!ray->hit)
 	{
 		getWallSide(ray);
-		if (worldMap[ray->map_y][ray->map_x] == 1)
+		if (data->parsing->map[ray->map_y][ray->map_x] == 1)
 			ray->hit = 1;
 	}
 }
@@ -94,7 +94,7 @@ void raycast(t_data *data, t_ray *ray)
 	line = data->line;
 	init_ray(ray, player);
 	check_steps(ray, player);
-	the_DDA(ray);
+	the_DDA(data, ray);
 	height_Scale(ray, player);
 	paint(data, ray, player, line);
 

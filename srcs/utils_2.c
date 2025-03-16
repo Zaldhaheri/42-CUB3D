@@ -46,7 +46,7 @@ int	check_for_map(char **file_data)
 	return (0);
 }
 
-int	atoi_colors(t_data *game, char **colors, char texture)
+int	atoi_colors(t_data *data, char **colors, char texture)
 {
 	int color[3];
 	int index;
@@ -60,9 +60,9 @@ int	atoi_colors(t_data *game, char **colors, char texture)
 		index++;
 	}
 	if (texture == 'F')
-		game->parsing->f = (color[0] << 16) | (color[1] << 8) | color[2];
+		data->parsing->f = (color[0] << 16) | (color[1] << 8) | color[2];
 	else if (texture == 'C')
-		game->parsing->c = (color[0] << 16) | (color[1] << 8) | color[2];
+		data->parsing->c = (color[0] << 16) | (color[1] << 8) | color[2];
 	else
 		return (0);
 	return (1);

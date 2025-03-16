@@ -25,6 +25,10 @@ $(NOM):	$(OBJ)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+	@rm -f $(OBJ) *~
+	@rm -f mlx_app
+
+fclean:
 	@rm -f $(NOM) $(OBJ) *~
 	@rm -f mlx_app
 

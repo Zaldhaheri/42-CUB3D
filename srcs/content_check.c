@@ -1,4 +1,4 @@
-#include "./include/cub3d.h"
+#include "../include/cub3d.h"
 
 int	count_lines(char *path)
 {
@@ -103,7 +103,7 @@ int	check_content(char **content)
 			return (write(1, "Error\nInvalid identifier\n", 25), free(line), 0);
 		free(line);
 	}
-	if (check_idents(identifier_count) == 0)
+	if (check_indents(identifier_count) == 0)
 		return (0);
 	return (1);
 }

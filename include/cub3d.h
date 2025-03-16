@@ -48,6 +48,14 @@
 # define C_FLOOR 0x1A9D0D
 # define C_CEILING 0x335DFF
 
+typedef struct s_line
+{
+	int x;
+	int y;
+	int y0;
+	int y1;
+} t_line;
+
 // Variables with player
 typedef struct s_player
 {
@@ -72,20 +80,24 @@ typedef struct s_ray
 	double sidedst_x;
 	double sidedst_y;
 	double cam_x;
+	double wall_dst;
 	int step_x;
 	int step_y;
 	int map_x;
 	int map_y;
+	int line_height;
+	int draw_s;
+	int draw_e;
 	int side;
 	int hit;
 } t_ray;
 
 typedef struct s_parse 
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
+	unsigned int	no[64][64];
+	unsigned int	so[64][64];
+	unsigned int	we[64][64];
+	unsigned int	ea[64][64];
 	int		f;
 	int		c;
 	char	**map;
@@ -105,6 +117,7 @@ typedef struct s_data
 	int			endian;
 	t_player	*plr;
 	t_ray		*ray;
+	t_line		*line;
 	t_parse		*parsing;
 } t_data;
 
@@ -112,7 +125,7 @@ typedef struct s_data
 	Func Prototypes
 */
 int		check_content(char **content);
-int 	color_and_texture(t_parse *game, char **content);
+int 	color_and_texture(t_data *game, char **content);
 int		parse_map(t_data *game, char **content, int start);
 
 int		free_darray(char **darray);
@@ -123,6 +136,24 @@ int		atoi_colors(t_data *game, char **colors, char texture);
 int		check_for_map(char **file_data);
 void	reverse_map(char **map);
 char	**extract_content(char *path);
+int		count_color_channels(char *line);
+int		string_compare(const char *string1, const char *string2);
+int		check_indents(int *identifier_count);
+int	setting_color(t_data *data, char *line);
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+int rendering(void *param);
+void raycast(t_data *data, t_ray *ray);
+void paint(t_data *data, t_ray *ray, t_player *player, t_line *line);
+void height_Scale(t_ray *ray, t_player *player);
+void the_DDA(t_data *data, t_ray *ray);
+void getWallSide(t_ray *ray);
+void check_steps(t_ray *ray, t_player *player);
+void init_ray(t_ray *ray, t_player *player);
+
+void init(t_data *data);
+void game_start(t_data *data);
 
 
 #endif

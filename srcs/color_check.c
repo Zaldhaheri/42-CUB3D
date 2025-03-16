@@ -1,6 +1,6 @@
 #include "../include/cub3d.h"
 
-int	setting_color(t_data *game, char *line)
+int	setting_color(t_data *data, char *line)
 {
 	char **split;
 	char **colors;
@@ -14,10 +14,10 @@ int	setting_color(t_data *game, char *line)
 		|| colors[3])
 		return (write(1, "Error\nInvalid color\n", 20), 0);
 	split = ft_split(colors[0], ' ');
-	if (ft_strcmp(split[0], "F") == 0)
-		total = use_atoi(game, colors, 'F');
-	else if (ft_strcmp(split[0], "C") == 0)
-		total = use_atoi(game, colors, 'C');
+	if (string_compare(split[0], "F") == 0)
+		total = atoi_colors(data, colors, 'F');
+	else if (string_compare(split[0], "C") == 0)
+		total = atoi_colors(data, colors, 'C');
 	else
 		total = printf("Error: Unknown color identifier\n") - 31;
 	return (free_darray(split), free_darray(colors), total);

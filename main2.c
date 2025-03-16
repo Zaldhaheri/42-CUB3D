@@ -1,4 +1,4 @@
-#include "raycast.h"
+#include "./include/cub3d.h"
 
 /*
  JUST FOR TESTING
@@ -6,33 +6,33 @@
 
 
 
-int worldMap[MAP_HEIGHT][MAP_WIDTH] = {
-    {1,1,1,1,1,1,1,1,1,1},
-    {1,0,0,0,0,0,0,0,0,1},
-    {1,0,1,1,0,0,0,1,0,1},
-    {1,0,1,0,0,0,0,1,0,1},
-    {1,0,1,0,0,0,0,1,0,1},
-    {1,0,1,0,0,0,0,1,0,1},
-    {1,0,0,0,0,1,1,0,0,1},
-    {1,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,1},
-    {1,1,1,1,1,1,1,1,1,1}
-};
+// int worldMap[MAP_HEIGHT][MAP_WIDTH] = {
+//     {1,1,1,1,1,1,1,1,1,1},
+//     {1,0,0,0,0,0,0,0,0,1},
+//     {1,0,1,1,0,0,0,1,0,1},
+//     {1,0,1,0,0,0,0,1,0,1},
+//     {1,0,1,0,0,0,0,1,0,1},
+//     {1,0,1,0,0,0,0,1,0,1},
+//     {1,0,0,0,0,1,1,0,0,1},
+//     {1,0,0,0,0,0,0,0,0,1},
+//     {1,0,0,0,0,0,0,0,0,1},
+//     {1,1,1,1,1,1,1,1,1,1}
+// };
 
-// init to test my raycast (so i dont wait for parsing)
-void init_player(t_data *data)
-{
-	t_player *player;
+// // init to test my raycast (so i dont wait for parsing)
+// void init_player(t_data *data)
+// {
+// 	t_player *player;
 
-	data->plr = malloc(sizeof(t_player));
-	player = data->plr;
-	player->pos_x = 5.0;
-	player->pos_y = 5.0; //x y starting positions
-	player->dir_x = 0;
-	player->dir_y = 1; //direction of the vector
-	player->plane_x = 0;
-	player->plane_y = 0.7; //camera plane
-}
+// 	data->plr = malloc(sizeof(t_player));
+// 	player = data->plr;
+// 	player->pos_x = 5.0;
+// 	player->pos_y = 5.0; //x y starting positions
+// 	player->dir_x = 0;
+// 	player->dir_y = 1; //direction of the vector
+// 	player->plane_x = 0;
+// 	player->plane_y = 0.7; //camera plane
+// }
 
 /*
   END OF TESTING
@@ -114,16 +114,4 @@ void paint(t_data *data, t_ray *ray, t_player *player, t_line *line)
 		my_mlx_pixel_put(data, line->x, y, C_FLOOR);
 		y++;
 	}
-}
-
-int main()
-{
-	t_data data;
-
-	init(&data);
-	init_player(&data);
-	game_start(&data);
-
-	free(data.plr);
-	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: zaldhahe <zaldhahe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 17:25:17 by mbabayan          #+#    #+#             */
-/*   Updated: 2024/08/02 14:33:35 by mbabayan         ###   ########.fr       */
+/*   Updated: 2025/03/16 17:26:38 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,4 @@ int	ft_atoi(const char *str)
 	else if (str[index] == 43)
 		++index;
 	return (overflow_handling(str + index, sign));
-}
-
-int main()
-{
-	char str[] = "2147483647900000000";
-
-	printf("%d\n", ft_atoi(str));
-	printf("%d\n", atoi(str));
 }
