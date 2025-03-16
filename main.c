@@ -29,7 +29,7 @@ void init_player(t_data *data)
 	player->pos_x = 5.0;
 	player->pos_y = 5.0; //x y starting positions
 	player->dir_x = 0;
-	player->dir_y = -1; //direction of the vector
+	player->dir_y = 1; //direction of the vector
 	player->plane_x = 0;
 	player->plane_y = 0.7; //camera plane
 }
