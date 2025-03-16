@@ -1,5 +1,55 @@
 #include "./include/cub3d.h"
 
+int	count_lines(char *path)
+{
+	int		fd;
+	char	*line;
+	int		total_lines;
+
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (-1);
+	total_lines = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+		total_lines++;
+	}
+	close(fd);
+	return (total_lines);
+}
+
+char	**extract_content(char *path)
+{
+	int		fd;
+	char	**content;
+	char	*line;
+	int		index;
+	int		line_count;
+
+	line_count = count_lines(path) + 1;
+	line = NULL;
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (NULL);
+	content = (char **)ft_calloc(line_count, 8);
+	if (content == NULL)
+		return (NULL);
+	index = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		content[index] = line;
+		line = get_next_line(fd);
+		index++;
+	}
+	content[index] = NULL;
+	close(fd);
+	return (content);
+}
+
 int	check_indents(int *identifier_count)
 {
 	if (identifier_count[0] != 1)
@@ -38,17 +88,17 @@ int	validate_idents(char *line, int *identifier_count)
 
 int	check_content(char **content)
 {
-	int		i;
+	int		index;
 	char	*line;
 	int		identifier_count[6];
 
-	i = 0;
+	index = 0;
 	if (content[0] == NULL)
 		return (write(1, "Error\nEmpty file\n", 17), 0);
 	ft_memset(identifier_count, 0, sizeof(int) * 6);
-	while (content[i] != NULL)
+	while (content[index] != NULL)
 	{
-		line = ft_strtrim(content[i], " \t\n");
+		line = ft_strtrim(content[index], " \t\n");
 		if (line[0] && validate_idents(line, identifier_count) == 0)
 			return (write(1, "Error\nInvalid identifier\n", 25), free(line), 0);
 		free(line);

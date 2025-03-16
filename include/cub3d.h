@@ -122,6 +122,7 @@ char	**split_color_channels(char *line);
 int		atoi_colors(t_data *game, char **colors, char texture);
 int		check_for_map(char **file_data);
 void	reverse_map(char **map);
+char	**extract_content(char *path);
 
 
 #endif
