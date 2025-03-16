@@ -8,7 +8,7 @@ int	parse_cub(const char *path, t_data *game)
 	content = extract_content(path);
 	if (!content)
 		return (write(1, "Error\nInvalid file\n", 20), 0);
-	if (!check_content(content) || !check_texturing(content, game))
+	if (!check_content(content) || !color_and_texture(content, game))
 		return (free_darray(content), 0);
 	index = check_for_map(content);
 	if (!index || !parse_map(game, content + index, index))

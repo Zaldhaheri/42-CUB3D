@@ -1,12 +1,12 @@
 #include "./include/cub3d.h"
 
-int	count_lines(char *file_path)
+int	count_lines(char *path)
 {
 	int		fd;
 	char	*line;
 	int		total_lines;
 
-	fd = open(file_path, O_RDONLY);
+	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (-1);
 	total_lines = 0;
@@ -21,33 +21,33 @@ int	count_lines(char *file_path)
 	return (total_lines);
 }
 
-char	**extract_content(char *file_path)
+char	**extract_content(char *path)
 {
 	int		fd;
-	char	**file_content;
+	char	**content;
 	char	*line;
 	int		index;
 	int		line_count;
 
-	line_count = count_lines(file_path) + 1;
+	line_count = count_lines(path) + 1;
 	line = NULL;
-	fd = open(file_path, O_RDONLY);
+	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	file_content = (char **)ft_calloc(line_count, 8);
-	if (file_content == NULL)
+	content = (char **)ft_calloc(line_count, 8);
+	if (content == NULL)
 		return (NULL);
 	index = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		file_content[index] = line;
+		content[index] = line;
 		line = get_next_line(fd);
 		index++;
 	}
-	file_content[index] = NULL;
+	content[index] = NULL;
 	close(fd);
-	return (file_content);
+	return (content);
 }
 
 int	check_indents(int *identifier_count)
