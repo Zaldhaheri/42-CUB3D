@@ -8,7 +8,7 @@ int	count_lines(char *path)
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (-1);
+	return (-1);
 	total_lines = 0;
 	line = get_next_line(fd);
 	while (line)
@@ -28,7 +28,7 @@ char	**extract_content(char *path)
 	char	*line;
 	int		index;
 	int		line_count;
-
+	
 	line_count = count_lines(path) + 1;
 	line = NULL;
 	fd = open(path, O_RDONLY);
@@ -94,7 +94,7 @@ int	check_content(char **content)
 
 	index = 0;
 	if (content[0] == NULL)
-		return (write(1, "Error\nEmpty file\n", 17), 0);
+		return (write(1, "Error\nEmpty file\n", 17), 0); //Error here when file not even empty
 	ft_memset(identifier_count, 0, sizeof(int) * 6);
 	while (content[index] != NULL)
 	{

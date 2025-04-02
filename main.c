@@ -19,18 +19,15 @@ int	parse_cub(char *path, t_data *data)
 
 int	main(int argc, char **argv)
 {
-	printf("i am here?");
 	t_data	data;
 
 	if (argc != 2)
-		(write(1, "Error\nUsage: ./cub3d <path_to_cub_file>\n", 35), exit(EF));
-	printf("here?");
+		write(1, "Error\nUsage: ./cub3d <path_to_cub_file>\n", 35), exit(EF);
 	if (ft_strnstr(argv[1], ".cub", 5))
-		(write(1, "Error\nInvalid file extension\n", 30), exit(EF));
+		write(1, "Error\nInvalid file extension\n", 30), exit(EF);
 	ft_memset(&data, 0, sizeof(t_data));
 	if (!parse_cub(argv[1], &data))
-		(free(&data),write(1, "Error\nParsing failed\n", 22), exit(EF));
-
+		free(&data),write(1, "Error\nParsing failed\n", 22), exit(EF);
 	init(&data);
 	//init_player(&data);
 	game_start(&data);

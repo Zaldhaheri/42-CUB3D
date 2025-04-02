@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbabayan <mbabayan@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: zaldhahe <zaldhahe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 16:27:05 by mbabayan          #+#    #+#             */
-/*   Updated: 2023/11/11 14:07:16 by mbabayan         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:51:47 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
  */
 char	*ft_strchr(const char *s, int c)
 {
+	if (!s)
+		return (NULL);
 	while ((char)c != *s)
 	{
 		if (!*s)
