@@ -32,12 +32,14 @@ typedef struct s_line
 // Variables with player
 typedef struct s_player
 {
-	double pos_x;
-	double pos_y;
-	double dir_x;
-	double dir_y;
-	double plane_x;
-	double plane_y;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	int		player_flag;
+	int		orientation;
 } t_player;
 
 // Variables with rays
