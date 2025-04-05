@@ -50,8 +50,8 @@ int	create_map(t_data *data, char **map)
 	{
 		data->parsing->map[index] = malloc((data->parsing->map_width + 1)
 				* sizeof(char));
-		if (!data->parsing->map[index])
-			return (free_darray(data->parsing->map), 0);
+		//if (!data->parsing->map[index])
+			//return (free_darray(data->parsing->map), 0);
 		data->parsing->map[index][data->parsing->map_height] = '\0';
 		ft_memset(data->parsing->map[index], 32, data->parsing->map_width);
 		ft_memcpy(data->parsing->map[index], map[index], ft_strlen(map[index]));

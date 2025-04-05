@@ -36,8 +36,6 @@ void check_steps(t_ray *ray, t_player *player) //(origin point 0,0 is top left c
 	}
 }
 
-
-
 void getWallSide(t_ray *ray)
 {
 	if (ray->sidedst_x < ray->sidedst_y)
@@ -97,6 +95,6 @@ void raycast(t_data *data, t_ray *ray)
 	the_DDA(data, ray);
 	height_Scale(ray, player);
 	paint(data, ray, player, line);
-
+	
 	ray->pxl_x++;
 }
