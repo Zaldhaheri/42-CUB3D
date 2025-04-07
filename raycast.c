@@ -1,5 +1,7 @@
 #include "./include/cub3d.h"
 
+
+// initializes ray variables
 void init_ray(t_ray *ray, t_player *player)
 {
 	ray->cam_x = (2 * ray->pxl_x) / (double) S_W - 1;
@@ -12,6 +14,7 @@ void init_ray(t_ray *ray, t_player *player)
 	ray->hit = 0;
 }
 
+// Finds the direction of the ray and distance to the first side.
 void check_steps(t_ray *ray, t_player *player) //(origin point 0,0 is top left corner)
 {
 	if (ray->dir_x >= 0) //move right
@@ -36,6 +39,7 @@ void check_steps(t_ray *ray, t_player *player) //(origin point 0,0 is top left c
 	}
 }
 
+// Finds the next wall side it will hit, either vertical or horizontal
 void getWallSide(t_ray *ray)
 {
 	if (ray->sidedst_x < ray->sidedst_y)
@@ -58,6 +62,7 @@ void getWallSide(t_ray *ray)
 	}
 }
 
+// DDA algorithm to find the distance of the wall it hits
 void the_DDA(t_data *data, t_ray *ray)
 {
 	while(!ray->hit)
@@ -68,21 +73,7 @@ void the_DDA(t_data *data, t_ray *ray)
 	}
 }
 
-void height_Scale(t_ray *ray, t_player *player)
-{
-	if (ray->side == EAST || ray->side == WEST)
-		ray->wall_dst = ((double) ray->map_x - player->pos_x + (1 - ray->step_x) / 2) / ray->dir_x;
-	else
-		ray->wall_dst = ((double) ray->map_y - player->pos_y + (1 - ray->step_y) / 2) / ray->dir_y;
-	ray->line_height = S_H / ray->wall_dst;
-	ray->draw_s = -ray->line_height / 2 + ((S_H / 2) * player->plane_y);
-	if (ray->draw_s <= 0)
-		ray->draw_s = 0;
-	ray->draw_e = ray->line_height / 2 + ((S_H / 2) * player->plane_y);
-	if (ray->draw_e >= S_W)
-		ray->draw_e = S_W - 1;
-}
-
+// calculations for each ray
 void raycast(t_data *data, t_ray *ray)
 {
 	t_player *player;
@@ -95,6 +86,5 @@ void raycast(t_data *data, t_ray *ray)
 	the_DDA(data, ray);
 	height_Scale(ray, player);
 	paint(data, ray, player, line);
-	
 	ray->pxl_x++;
 }

@@ -1,57 +1,61 @@
 #include "./include/cub3d.h"
 
+// Prototype parsing
+
 #define MAP_WIDTH 10
 #define MAP_HEIGHT 10
 
 int worldMap[MAP_HEIGHT][MAP_WIDTH] = {
-	    {1,1,1,1,1,1,1,1,1,1},
-	    {1,0,0,0,0,0,0,0,0,1},
-	    {1,0,1,0,0,0,0,1,1,1},
-	    {1,0,0,0,0,0,0,0,1,1},
-	    {1,1,0,0,0,0,0,0,0,1}, //5
-	    {1,0,0,0,0,0,1,1,1,1},
-	    {1,0,0,0,0,0,0,0,0,1},
-	    {1,0,1,0,0,0,0,0,0,1},
-	    {1,0,0,0,0,1,1,0,0,1},
-	    {1,1,1,1,1,1,1,1,1,1}
-	};
+    {1,1,1,1,1,1,1,1,1,1},
+    {1,0,0,0,0,0,0,0,0,1},
+    {1,0,1,0,0,0,0,1,1,1},
+    {1,0,0,0,0,0,0,0,1,1},
+    {1,1,0,0,0,0,0,0,0,1}, //5
+    {1,0,0,0,0,0,1,1,1,1},
+    {1,0,0,0,0,0,0,0,0,1},
+    {1,0,1,0,0,0,0,0,0,1},
+    {1,0,0,0,0,1,1,0,0,1},
+    {1,1,1,1,1,1,1,1,1,1}
+};
 	
-	// init to test my raycast (so i dont wait for parsing)
-	void test_init_player(t_data *data)
-	{
-		t_player	*player;
-	
-		data->plr = malloc(sizeof(t_player));
-		player = data->plr;
-		player->pos_x = 5.0;
-		player->pos_y = 5.0; //x y starting positions
-		player->dir_x = -1;
-		player->dir_y = 0.5; //direction of the vector
-		player->plane_x = 0;
-		player->plane_y = 0.9; //camera plane
-		
-	}
+// init to test my raycast (so i dont wait for parsing)
+void test_init_player(t_data *data)
+{
+	t_player	*player;
 
-	void test_init_parsing(t_data *data)
-	{
-		t_parse *parsing;
+	data->plr = malloc(sizeof(t_player));
+	player = data->plr;
+	player->pos_x = 5.0;
+	player->pos_y = 5.0; //x y starting positions
+	player->dir_x = -1;
+	player->dir_y = 0.5; //direction of the vector
+	player->plane_x = 0;
+	player->plane_y = 0.9; //camera plane
 	
-		data->parsing = malloc(sizeof(t_parse));
-		parsing = data->parsing;
-		parsing->map = malloc(sizeof(int *) * MAP_HEIGHT);
-		if (!parsing->map)
+}
+
+void test_init_parsing(t_data *data)
+{
+	t_parse *parsing;
+
+	data->parsing = malloc(sizeof(t_parse));
+	parsing = data->parsing;
+	parsing->map = malloc(sizeof(int *) * MAP_HEIGHT);
+	if (!parsing->map)
+		exit(1); // or handle error
+	for (int i = 0; i < MAP_HEIGHT; i++) {
+		parsing->map[i] = malloc(sizeof(int) * MAP_WIDTH);
+		if (!parsing->map[i])
     		exit(1); // or handle error
-
-		for (int i = 0; i < MAP_HEIGHT; i++) {
-    		parsing->map[i] = malloc(sizeof(int) * MAP_WIDTH);
-    		if (!parsing->map[i])
-        		exit(1); // or handle error
-    		for (int j = 0; j < MAP_WIDTH; j++) {
-        		parsing->map[i][j] = worldMap[i][j];
-    		}
+		for (int j = 0; j < MAP_WIDTH; j++) {
+    		parsing->map[i][j] = worldMap[i][j];
 		}
 	}
+}
 
+// Parsing test ^
+
+// change this location max
 int	parse_cub(char *path, t_data *data)
 {
 	char	**content;

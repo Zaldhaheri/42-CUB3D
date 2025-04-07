@@ -28,6 +28,14 @@ void init(t_data *data)
 	}
 }
 
+void game_start(t_data *data)
+{
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	mlx_loop_hook(data->mlx, rendering, data);
+	mlx_loop(data->mlx);
+}
+
+// Runs on the loop hook, casts the rays and puts image to window
 int rendering(void *param)
 {
 	t_data *data;
@@ -45,48 +53,11 @@ int rendering(void *param)
 	while (ray->pxl_x < S_W) //loops over every pixel in width
 	{
 		raycast(data, ray);
-		//my_mlx_pixel_put(data, ray->pxl_x, 100, 0xAF0F0); // just to check
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	free(ray);
 	return (0);
 }
 
-void game_start(t_data *data)
-{
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-	mlx_loop_hook(data->mlx, rendering, data);
-	mlx_loop(data->mlx);
-}
+// runs the game
 
-void paint(t_data *data, t_ray *ray, t_player *player, t_line *line)
-{
-	(void)player;
-	int y;
-
-	y = 0;
-	line->x = ray->pxl_x;
-
-	if (ray->draw_s < 0)
-		ray->draw_s = 0;
-	if (ray->draw_e >= S_H)
-		ray->draw_e = S_H - 1;
-
-	while (y < ray->draw_s) //draw ceiling
-	{
-		my_mlx_pixel_put(data, line->x, y, C_CEILING);
-		y++;
-	}
-	y = ray->draw_s;
-	while (y < ray->draw_e) //draw wall
-	{
-		my_mlx_pixel_put(data, line->x, y, 0x9E3513);
-		y++;
-	}
-	y = ray->draw_e;
-	while(y < S_H) //draw floor
-	{
-		my_mlx_pixel_put(data, line->x, y, C_FLOOR);
-		y++;
-	}
-}
