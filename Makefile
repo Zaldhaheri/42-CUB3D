@@ -1,6 +1,6 @@
 NAME = cub3d
 
-SRC = main.c raycast.c main2.c srcs/color_check.c srcs/content_check.c srcs/parse_map.c srcs/texturing_check.c srcs/utils_2.c srcs/utils.c
+SRC = main.c raycast.c raycast2.c main2.c srcs/color_check.c srcs/content_check.c srcs/parse_map.c srcs/texturing_check.c srcs/utils_2.c srcs/utils.c
 
 OBJ = $(SRC:.c=.o)
 

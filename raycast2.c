@@ -1,0 +1,45 @@
+#include "./include/cub3d.h"
+
+// Calculates the height scale of the wall based on the distance from the player and plane
+void height_Scale(t_ray *ray, t_player *player)
+{
+	if (ray->side == EAST || ray->side == WEST)
+		ray->wall_dst = ((double) ray->map_x - player->pos_x + (1 - ray->step_x) / 2) / ray->dir_x;
+	else
+		ray->wall_dst = ((double) ray->map_y - player->pos_y + (1 - ray->step_y) / 2) / ray->dir_y;
+	ray->line_height = S_H / ray->wall_dst;
+	ray->draw_s = -ray->line_height / 2 + ((S_H / 2) * player->plane_y);
+	if (ray->draw_s <= 0)
+		ray->draw_s = 0;
+	ray->draw_e = ray->line_height / 2 + ((S_H / 2) * player->plane_y);
+	if (ray->draw_e >= S_W)
+		ray->draw_e = S_W - 1;
+}
+
+
+// Colors in the ceiling, wall and, floor pixel by pixel based on calculations from height scale
+void paint(t_data *data, t_ray *ray, t_player *player, t_line *line)
+{
+	(void)player;
+	int y;
+
+	y = 0;
+	line->x = ray->pxl_x;
+	while (y < ray->draw_s) //draw ceiling
+	{
+		my_mlx_pixel_put(data, line->x, y, C_CEILING);
+		y++;
+	}
+	y = ray->draw_s;
+	while (y < ray->draw_e) //draw wall
+	{
+		my_mlx_pixel_put(data, line->x, y, 0xA45670);
+		y++;
+	}
+	y = ray->draw_e;
+	while(y < S_H) //draw floor
+	{
+		my_mlx_pixel_put(data, line->x, y, C_FLOOR);
+		y++;
+	}
+}

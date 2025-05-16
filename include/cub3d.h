@@ -100,7 +100,7 @@ typedef struct s_parse
 	unsigned int	ea[64][64];
 	int		f;
 	int		c;
-	char	**map;
+	int	**map;
 	int		map_height;
 	int		map_width;
 } t_parse;
