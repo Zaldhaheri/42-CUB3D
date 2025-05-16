@@ -20,22 +20,23 @@ void check_steps(t_ray *ray, t_player *player) //(origin point 0,0 is top left c
 	if (ray->dir_x >= 0) //move right
 	{
 		ray->step_x = 1;
-		ray->sidedst_x = (ray->map_x + 1.0 - player->pos_x);
+		ray->sidedst_x = (ray->map_x + 1.0 - player->pos_x) * ray->delta_x;
 	}
 	else //move left
 	{
 		ray->step_x = -1;
-		ray->sidedst_x = (player->pos_x - ray->map_x);
+		ray->sidedst_x = (player->pos_x - ray->map_x) * ray->delta_x;
 	}
-	if (ray->dir_y < 0) //move up
-	{
-		ray->step_y = -1;
-		ray->sidedst_y = (player->pos_y - ray->map_y);
-	}
-	else //move down
+	if (ray->dir_y >= 0)
 	{
 		ray->step_y = 1;
-		ray->sidedst_y = (ray->map_y + 1.0 - player->pos_y);
+		ray->sidedst_y = (player->pos_y - ray->map_y) * ray->delta_y;
+		ray->sidedst_y = (ray->map_y + 1.0 - player->pos_y) * ray->delta_y;
+	}
+	else
+	{
+		ray->step_y = -1;
+		ray->sidedst_y = (player->pos_y - ray->map_y) * ray->delta_y;
 	}
 }
 
@@ -91,7 +92,7 @@ void raycast(t_data *data, t_ray *ray)
 	init_ray(ray, player);
 	check_steps(ray, player);
 	the_DDA(data, ray);
-	height_Scale(ray, player);
+	height_Scale(ray);
 	paint(data, ray, player, line);
 	ray->pxl_x++;
 }

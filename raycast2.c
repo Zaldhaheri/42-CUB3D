@@ -1,12 +1,8 @@
 #include "./include/cub3d.h"
 
 // Calculates the height scale of the wall based on the distance from the player and plane
-void height_Scale(t_ray *ray, t_player *player)
+void height_Scale(t_ray *ray)
 {
-	if (ray->side == EAST || ray->side == WEST)
-		ray->wall_dst = ((double) ray->map_x - player->pos_x + (1 - ray->step_x) / 2) / ray->dir_x;
-	else
-		ray->wall_dst = ((double) ray->map_y - player->pos_y + (1 - ray->step_y) / 2) / ray->dir_y;
 	ray->line_height = S_H / ray->wall_dst;
 	ray->draw_s = -ray->line_height / 2 + (S_H / 2);
 	if (ray->draw_s <= 0)

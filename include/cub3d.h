@@ -40,7 +40,8 @@
 # define C_FLOOR 0x1A9D0D
 # define C_CEILING 0x335DFF
 
-#define ROT_SPEED 0.05
+# define ROT_SPEED 0.04
+# define MOVE_SPEED 0.1
 
 /*
 	Structs
@@ -146,7 +147,7 @@ void update_plane(t_player *plr);
 int rendering(void *param);
 void raycast(t_data *data, t_ray *ray);
 void paint(t_data *data, t_ray *ray, t_player *player, t_line *line);
-void height_Scale(t_ray *ray, t_player *player);
+void height_Scale(t_ray *ray);
 void the_DDA(t_data *data, t_ray *ray);
 void getWallSide(t_ray *ray);
 void check_steps(t_ray *ray, t_player *player);
