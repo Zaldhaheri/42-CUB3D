@@ -30,23 +30,21 @@
 # define EF					EXIT_FAILURE
 # define ES					EXIT_SUCCESS
 
-/*
-	Structs
-*/
-
 # define S_W 1800 // screen  width
 # define S_H 1000 // Screen height
-# define FOV 60 //FOV
-
+# define FOV 0.60 //FOV
 # define NORTH 2
 # define SOUTH 3
 # define EAST 4
 # define WEST 5
-
-
-// Colors
 # define C_FLOOR 0x1A9D0D
 # define C_CEILING 0x335DFF
+
+#define ROT_SPEED 0.05
+
+/*
+	Structs
+*/
 
 typedef struct s_line
 {
@@ -142,6 +140,8 @@ int		check_indents(int *identifier_count);
 int	setting_color(t_data *data, char *line);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+void update_plane(t_player *plr);
 
 int rendering(void *param);
 void raycast(t_data *data, t_ray *ray);

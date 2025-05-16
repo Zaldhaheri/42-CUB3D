@@ -8,10 +8,10 @@ void height_Scale(t_ray *ray, t_player *player)
 	else
 		ray->wall_dst = ((double) ray->map_y - player->pos_y + (1 - ray->step_y) / 2) / ray->dir_y;
 	ray->line_height = S_H / ray->wall_dst;
-	ray->draw_s = -ray->line_height / 2 + ((S_H / 2) * player->plane_y);
+	ray->draw_s = -ray->line_height / 2 + (S_H / 2);
 	if (ray->draw_s <= 0)
 		ray->draw_s = 0;
-	ray->draw_e = ray->line_height / 2 + ((S_H / 2) * player->plane_y);
+	ray->draw_e = ray->line_height / 2 + (S_H / 2);
 	if (ray->draw_e >= S_W)
 		ray->draw_e = S_W - 1;
 }
@@ -31,9 +31,18 @@ void paint(t_data *data, t_ray *ray, t_player *player, t_line *line)
 		y++;
 	}
 	y = ray->draw_s;
-	while (y < ray->draw_e) //draw wall
+	int wall_color = 0xA45670;
+	if (ray->side == NORTH)
+		wall_color = 0xFF0000; // red
+	else if (ray->side == SOUTH)
+		wall_color = 0x00FF00; // green
+	else if (ray->side == EAST)
+		wall_color = 0x0000FF; // blue
+	else if (ray->side == WEST)
+		wall_color = 0xFFFF00; // yellow
+	while (y < ray->draw_e)
 	{
-		my_mlx_pixel_put(data, line->x, y, 0xA45670);
+		my_mlx_pixel_put(data, line->x, y, wall_color);
 		y++;
 	}
 	y = ray->draw_e;

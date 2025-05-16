@@ -4,7 +4,7 @@
 // initializes ray variables
 void init_ray(t_ray *ray, t_player *player)
 {
-	ray->cam_x = (2 * ray->pxl_x) / (double) S_W - 1;
+	ray->cam_x = (2 * (ray->pxl_x + 0.5)) / (double) S_W - 1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->cam_x;
 	ray->dir_y = player->dir_y + player->plane_y * ray->cam_x;
 	ray->delta_x = fabs(1 / ray->dir_x);
@@ -42,14 +42,14 @@ void check_steps(t_ray *ray, t_player *player) //(origin point 0,0 is top left c
 // Finds the next wall side it will hit, either vertical or horizontal
 void getWallSide(t_ray *ray)
 {
-	if (ray->sidedst_x < ray->sidedst_y)
+	if (ray->sidedst_x <= ray->sidedst_y)
 	{
 		ray->sidedst_x += ray->delta_x;
 		ray->map_x += ray->step_x;
 		if (ray->step_x == -1)
-			ray->side = EAST;
-		else
 			ray->side = WEST;
+		else
+			ray->side = EAST;
 	}
 	else
 	{
@@ -69,10 +69,17 @@ void the_DDA(t_data *data, t_ray *ray)
 	{
 		getWallSide(ray);
 		if (data->parsing->map[ray->map_y][ray->map_x] == 1)
+		{
 			ray->hit = 1;
+			if (ray->side == EAST || ray->side == WEST)
+				ray->wall_dst = (ray->map_x - data->plr->pos_x + (1 - ray->step_x) / 2.0) / ray->dir_x;
+			else
+				ray->wall_dst = (ray->map_y - data->plr->pos_y + (1 - ray->step_y) / 2.0) / ray->dir_y;
+		
+		}
+
 	}
 }
-
 // calculations for each ray
 void raycast(t_data *data, t_ray *ray)
 {
