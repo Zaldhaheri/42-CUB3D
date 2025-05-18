@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaldhahe <zaldhahe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 14:22:11 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/03/16 17:04:44 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/18 14:57:54 by mbabayan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@
 # include <string.h>
 # include <unistd.h>
 # include <limits.h>
+# include <fcntl.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 42
 # endif
 
 /*
@@ -71,9 +72,10 @@ char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				**ft_split(char const *s, char c);
+int					ft_strcmp(const char *s1, const char *s2);
+void				ft_revtrim(char *s1, char const *set);
 
-char				*ft_strnstr(const char *haystack, const char *needle,
-						size_t len);
+char				*ft_strnstr(char const *haystack, char const *needle, int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_itoa(int n);
 /*
@@ -100,9 +102,11 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 
+char	*gnl_strchr(const char *str, int c);
+char	*gnl_strdup(const char *str);
+size_t	gnl_strlen(const char *str);
+char	*gnl_strjoin(char const *s1, char const *s2);
+char	*gnl_substr(char const *s, unsigned int start, size_t len);
 char	*get_next_line(int fd);
-char	*ft_readfile(char *save, int fd);
-char	*ft_get_line(char *save);
-char	*ft_save(char *save);
 
 #endif

@@ -11,7 +11,7 @@ SRCS = ft_calloc.c ft_memset.c ft_memmove.c ft_isalnum.c ft_isdigit.c ft_isalpha
 		ft_memchr.c ft_strrchr.c ft_strlcat.c ft_memcmp.c ft_substr.c \
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_strdup.c \
 		ft_strjoin.c ft_strtrim.c ft_striteri.c ft_strnstr.c ft_strmapi.c ft_itoa.c ft_split.c\
-		get_next_line.c get_next_line_utils.c \
+		get_next_line.c get_next_line_utils.c ft_strcmp.c ft_revtrim.c\
 
 BON_SRC =  ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
 		ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c\

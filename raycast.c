@@ -68,7 +68,7 @@ void the_DDA(t_data *data, t_ray *ray)
 	while(!ray->hit)
 	{
 		getWallSide(ray);
-		if (data->parsing->map[ray->map_y][ray->map_x] == 1)
+		if (data->map[ray->map_y][ray->map_x] == 1)
 			ray->hit = 1;
 	}
 }
