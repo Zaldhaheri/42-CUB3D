@@ -1,12 +1,12 @@
 NAME = cub3d
 
-SRC = main.c raycast.c raycast2.c main2.c srcs/color_check.c srcs/content_check.c srcs/parse_map.c srcs/texturing_check.c srcs/utils_2.c srcs/utils.c
+SRC = main.c raycast.c raycast2.c main2.c srcs/content_check.c srcs/map.c srcs/texturing_check.c srcs/utils_2.c srcs/map_helpers.c srcs/texture_helpers.c
 
 OBJ = $(SRC:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 MLX = srcs/MLX
 LIBFT = srcs/LIBFT
 

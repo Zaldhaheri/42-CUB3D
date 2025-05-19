@@ -3,62 +3,95 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaldhahe <zaldhahe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 13:58:39 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/04/02 17:57:03 by zaldhahe         ###   ########.fr       */
+/*   Created: 2024/01/30 17:20:01 by zaldhahe          #+#    #+#             */
+/*   Updated: 2025/05/16 15:52:35 by mbabayan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
- * function that reads the file and stores content in static var
- */
-char	*ft_readfile(char *conserve, int fd)
+char	*trim_line(char *line)
 {
-	int		rd;
-	char	*buffer;
+	ssize_t	i;
+	char	*str;
 
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buffer)
+	i = 0;
+	while (line[i] != '\0' && line[i] != '\n')
+		i++;
+	if (line[i] == '\0' || line[1] == '\0')
 		return (NULL);
-	rd = 1;
-	while (ft_strchr(conserve, '\n') == 0 && rd != 0)
+	str = ft_substr(line, i + 1, ft_strlen(line));
+	if (*str == '\0')
 	{
-		rd = read(fd, buffer, BUFFER_SIZE);
-		if (rd == -1)
+		free(str);
+		return (NULL);
+	}
+	line[i + 1] = '\0';
+	return (str);
+}
+
+char	*read_buffer(int fd, char *str, char *buffer)
+{
+	ssize_t	s_bytes;
+	char	*temp;
+
+	s_bytes = 1;
+	while (s_bytes > 0)
+	{
+		s_bytes = read(fd, buffer, BUFFER_SIZE);
+		if (s_bytes == -1)
 		{
-			if (conserve != NULL)
-				free(conserve);
-			free(buffer);
+			free(str);
 			return (NULL);
 		}
-		buffer[rd] = '\0';
-		conserve = ft_strjoin(conserve, buffer);
+		else if (s_bytes == 0)
+			break ;
+		buffer[s_bytes] = '\0';
+		if (!str)
+			str = ft_strdup("");
+		temp = str;
+		str = ft_strjoin(temp, buffer);
+		free(temp);
+		temp = NULL;
+		if (ft_strchr(buffer, '\n'))
+			break ;
 	}
-	free(buffer);
-	return (conserve);
+	return (str);
 }
 
-/*
- * function read file line by line, it first checks if fd
- * is valid, if the buffer size is valid and if the buffer
- * size is not bigger than the max int value and then it
- * calls the ft_readfile function to read the file and
-
- */
 char	*get_next_line(int fd)
 {
-	char		*print;
-	static char	*conserve;
+	static char	*str;
+	char		*line;
+	char		*buffer;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
+	buffer = (char *) malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0))
+	{
+		free(buffer);
+		free(str);
+		buffer = NULL;
+		str = NULL;
 		return (NULL);
-	conserve = ft_readfile(conserve, fd);
-	if (!conserve)
+	}
+	if (!buffer)
 		return (NULL);
-	print = ft_get_line(conserve);
-	conserve = ft_save(conserve);
-	return (print);
+	line = read_buffer(fd, str, buffer);
+	free(buffer);
+	buffer = NULL;
+	if (!line)
+		return (NULL);
+	str = trim_line(line);
+	return (line);
 }
+
+// int main()
+// {
+// 	int fd = open("h.txt", O_RDONLY);
+// 	printf("fd: %d\n", fd);
+// 	printf("gnl[1]: %s\n", get_next_line(fd));
+// 	printf("gnl[2]: %s\n", get_next_line(fd));
+// 	printf("gnl[3]: %s\n", get_next_line(fd));
+// }

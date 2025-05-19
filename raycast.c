@@ -69,8 +69,8 @@ void the_DDA(t_data *data, t_ray *ray)
 	while(!ray->hit)
 	{
 		getWallSide(ray);
-		if (data->parsing->map[ray->map_y][ray->map_x] == 1)
-		{
+		if (data->map[ray->map_y][ray->map_x] == '1')
+    {
 			ray->hit = 1;
 			if (ray->side == EAST || ray->side == WEST)
 				ray->wall_dst = (ray->map_x - data->plr->pos_x + (1 - ray->step_x) / 2.0) / ray->dir_x;

@@ -3,72 +3,101 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaldhahe <zaldhahe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 13:59:02 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/03/16 17:05:07 by zaldhahe         ###   ########.fr       */
+/*   Created: 2024/01/24 18:19:18 by zaldhahe          #+#    #+#             */
+/*   Updated: 2025/05/16 15:54:54 by mbabayan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
- * function that returns the line after allocating space for the line
- * and 
- */
-char	*ft_get_line(char *conserve)
+char	*gnl_strchr(const char *str, int c)
 {
-	int		index;
-	char	*line;
-
-	index = 0;
-	if (!conserve[index])
-		return (NULL);
-	while (conserve[index] != '\0' && conserve[index] != '\n')
-		index++;
-	line = malloc(sizeof(char) * (index + 1 + (conserve[index] == '\n')));
-	if (!line)
-		return (NULL);
-	index = 0;
-	while (conserve[index] != '\0' && conserve[index] != '\n')
+	while (*str)
 	{
-		line[index] = conserve[index];
-		index++;
+		if (*str == (char) c)
+			break ;
+		str++;
 	}
-	if (conserve[index] == '\n')
-	{
-		line[index] = conserve[index];
-		index++;
-	}
-	line[index] = '\0';
-	return (line);
+	if (*str == (char)c)
+		return ((char *)str);
+	return (NULL);
 }
 
-/*
- * function that returns the rest of the string
- */
-char	*ft_save(char *conserve)
+char	*gnl_strdup(const char *str)
 {
-	int		index;
-	int		index2;
-	char	*buffer;
+	char	*dup;
+	int		i;
 
-	index = 0;
-	index2 = 0;
-	while (conserve[index] != '\0' && conserve[index] != '\n')
-		index++;
-	if (!conserve[index])
+	i = 0;
+	dup = (char *) malloc(ft_strlen(str) + 1);
+	if (!dup)
+		return (NULL);
+	while (str[i])
 	{
-		free(conserve);
-		return (NULL);
+		dup[i] = str[i];
+		i++;
 	}
-	buffer = malloc(sizeof(char) * ((ft_strlen(conserve) - index) + 1));
-	if (!buffer)
+	dup[i] = '\0';
+	return (dup);
+}
+
+size_t	gnl_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*gnl_substr(char const *s, unsigned int start, size_t len)
+{
+	char			*r;
+	size_t			i;
+	unsigned int	strlen;
+
+	i = 0;
+	strlen = ft_strlen(s);
+	if (!s)
 		return (NULL);
-	index++;
-	while (conserve[index] != '\0')
-		buffer[index2++] = conserve[index++];
-	buffer[index2] = '\0';
-	free(conserve);
-	return (buffer);
+	if (start >= strlen)
+		return (ft_strdup(""));
+	if (len + start >= strlen)
+		len = strlen - start;
+	r = malloc(sizeof(char) * len + 1);
+	if (!r)
+		return (NULL);
+	while (s[start] && i < len)
+		r[i++] = s[start++];
+	r[i] = '\0';
+	return (r);
+}
+
+char	*gnl_strjoin(char const *s1, char const *s2)
+{
+	size_t	len1;
+	size_t	len2;
+	size_t	i;
+	size_t	j;
+	char	*r;
+
+	i = 0;
+	j = 0;
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	r = (char *) malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!r)
+		return (NULL);
+	while (s1[i])
+	{
+		r[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+		r[i++] = s2[j++];
+	r[i] = '\0';
+	return (r);
 }

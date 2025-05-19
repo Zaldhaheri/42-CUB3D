@@ -1,109 +1,115 @@
 #include "../include/cub3d.h"
 
-int	count_lines(char *path)
+
+static int	set_flag(bool *flag, char *identifier)
+{
+	if (*flag)
+		return (printf("Error\nDuplicate '%s'\n", identifier), -1);
+	*flag = 1;
+	return (0);
+}
+
+static int	count_lines(const char *path)
 {
 	int		fd;
 	char	*line;
-	int		total_lines;
+	int		count_lines;
 
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-	return (-1);
-	total_lines = 0;
+		return (-1);
+	count_lines = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
-		total_lines++;
+		count_lines++;
 	}
 	close(fd);
-	return (total_lines);
+	return (count_lines);
 }
 
-char	**extract_content(char *path)
+char	**extract_f(const char *path)
 {
 	int		fd;
 	char	**content;
 	char	*line;
 	int		index;
-	int		line_count;
-	
-	line_count = count_lines(path) + 1;
+
 	line = NULL;
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	content = (char **)ft_calloc(line_count, 8);
+	content = (char **)ft_calloc(count_lines(path) + 1, 8);
 	if (content == NULL)
 		return (NULL);
 	index = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		content[index] = line;
+		content[index++] = line;
 		line = get_next_line(fd);
-		index++;
 	}
 	content[index] = NULL;
 	close(fd);
 	return (content);
 }
 
-int	check_indents(int *identifier_count)
+static int	check_missing_flags(bool *flags)
 {
-	if (identifier_count[0] != 1)
-		return (write(1, "Error\nInvalid floor identifiers\n", 42), 0);
-	if (identifier_count[1] != 1)
-		return (write(1, "Error\nInvalid ceiling identifiers\n", 44), 0);
-	if (identifier_count[2] != 1)
-		return (write(1, "Error\nInvalid number of NO identifiers\n", 39), 0);
-	if (identifier_count[3] != 1)
-		return (write(1, "Error\nInvalid number of SO identifiers\n", 39), 0);
-	if (identifier_count[4] != 1)
-		return (write(1, "Error\nInvalid number of WE identifiers\n", 39), 0);
-	if (identifier_count[5] != 1)
-		return (write(1, "Error\nInvalid number of EA identifiers\n", 39), 0);
-	return (1);
+	const char	*characters[6];
+	int			index;
+
+	characters[0] = "NO";
+	characters[1] = "SO";
+	characters[2] = "WE";
+	characters[3] = "EA";
+	characters[4] = "F";
+	characters[5] = "C";
+	index = 0;
+	while (index < 6 && flags[index])
+		index++;
+	if (index != 6)
+		return (printf("Error\nMissing '%s'\n", characters[index]), -1);
+	return (0);
 }
 
-int	validate_idents(char *line, int *identifier_count)
+static int	check_flags(char *line, bool *flags)
 {
-	if (line[0] == 'F' && line[1] == ' ')
-		identifier_count[0]++;
-	else if (line[0] == 'C' && line[1] == ' ')
-		identifier_count[1]++;
-	else if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
-		identifier_count[2]++;
-	else if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
-		identifier_count[3]++;
-	else if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
-		identifier_count[4]++;
-	else if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
-		identifier_count[5]++;
-	else
-		return (0);
-	return (1);
+	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "NO\t", 3))
+		return (set_flag(flags, "NO"));
+	else if (!ft_strncmp(line, "SO ", 3) || !ft_strncmp(line, "SO\t", 3))
+		return (set_flag(flags + 1, "SO"));
+	else if (!ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "WE\t", 3))
+		return (set_flag(flags + 2, "WE"));
+	else if (!ft_strncmp(line, "EA ", 3) || !ft_strncmp(line, "EA\t", 3))
+		return (set_flag(flags + 3, "EA"));
+	else if (line[0] == 'F' && (line[1] == ' ' || line[1] == '\t'))
+		return (set_flag(flags + 4, "F"));
+	else if (line[0] == 'C' && (line[1] == ' ' || line[1] == '\t'))
+		return (set_flag(flags + 5, "C"));
+	return (0);
 }
 
-int	check_content(char **content)
+int	validate_content(char **f_data)
 {
 	int		index;
-	char	*line;
-	int		identifier_count[6];
+	bool	flags[6];
+	char	*t_line;
 
-	index = 0;
-	if (content[0] == NULL)
-		return (write(1, "Error\nEmpty file\n", 17), 0); //Error here when file not even empty
-	ft_memset(identifier_count, 0, sizeof(int) * 6);
-	while (content[index] != NULL)
+	index = -1;
+	if (f_data[0] == NULL)
+		return (printf("Error\nEmpty file.\n"), -1);
+	ft_memset(flags, 0, sizeof(flags));
+	while (f_data[++index])
 	{
-		line = ft_strtrim(content[index], " \t\n");
-		if (line[0] && validate_idents(line, identifier_count) == 0)
-			return (write(1, "Error\nInvalid identifier\n", 25), free(line), 0);
-		free(line);
+		t_line = ft_strtrim(f_data[index], " \t\n");
+		if (t_line[0] && check_flags(t_line, flags) < 0)
+			return (free(t_line), -1);
+		free(t_line);
 	}
-	if (check_indents(identifier_count) == 0)
-		return (0);
-	return (1);
+	if (check_missing_flags(flags) == -1)
+		return (-1);
+	return (0);
 }

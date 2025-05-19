@@ -15,7 +15,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void init(t_data *data)
 {
-	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, S_W, S_H, "CUB3D");
 	data->img = mlx_new_image(data->mlx, S_W, S_H);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, &data->line_length, &data->endian);

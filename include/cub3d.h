@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 /*
 	Defines
@@ -91,22 +92,23 @@ typedef struct s_ray
 	int hit;
 } t_ray;
 
-typedef struct s_parse 
+typedef struct s_textures
 {
-	unsigned int	no[64][64];
-	unsigned int	so[64][64];
-	unsigned int	we[64][64];
-	unsigned int	ea[64][64];
-	int		f;
-	int		c;
-	int	**map;
-	int		map_height;
-	int		map_width;
-} t_parse;
+	unsigned int	door[64][64];
+	unsigned int	east[64][64];
+	unsigned int	north[64][64];
+	unsigned int	south[64][64];
+	unsigned int	west[64][64];
+	unsigned int	ceiling;
+	unsigned int	floor;
+} t_textures;
 
 // Main struct
 typedef struct s_data
 {
+	char **map;
+	int		map_height;
+	int		map_width;
 	void		*mlx;
 	void		*win;
 	void		*img;
@@ -117,28 +119,25 @@ typedef struct s_data
 	t_player	*plr;
 	t_ray		*ray;
 	t_line		*line;
-	t_parse		*parsing;
+	t_textures	textures;
 } t_data;
 
 /*
 	Func Prototypes
 */
-int		check_content(char **content);
-int 	color_and_texture(t_data *game, char **content);
-int		parse_map(t_data *game, char **content, int start);
+int	free_darray(char **darray);
+int	use_atoi(t_data *data, char **colors, char texture);
+char	**color_split(char *s);
+int	texture_n_colors(t_data *cub3d, char **f_data);
+int	ft_strcmp(const char *s1, const char *s2);
+void	ft_revtrim(char *s1, char const *set);
+char	**extract_f(const char *file_path);
+int	validate_content(char **f_data);
+int	count_chars(const char *str, char ch);
+int	parse_map(t_data *cub3d, char **data, int i);
+int	check_walls(t_data *cub3d);
+int	find_start(char **f_data);
 
-int		free_darray(char **darray);
-void	trim_end(char *string, char *set);
-int		string_compare(const char *string1, const char *string2);
-char	**split_color_channels(char *line);
-int		atoi_colors(t_data *game, char **colors, char texture);
-int		check_for_map(char **file_data);
-void	reverse_map(char **map);
-char	**extract_content(char *path);
-int		count_color_channels(char *line);
-int		string_compare(const char *string1, const char *string2);
-int		check_indents(int *identifier_count);
-int	setting_color(t_data *data, char *line);
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 

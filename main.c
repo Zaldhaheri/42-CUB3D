@@ -32,63 +32,88 @@ void test_init_player(t_data *data)
 	update_plane(player);	
 }
 
-void test_init_parsing(t_data *data)
-{
-	t_parse *parsing;
+// void test_init_parsing(t_data *data)
+// {
+// 	t_parse *parsing;
 
-	data->parsing = malloc(sizeof(t_parse));
-	parsing = data->parsing;
-	parsing->map = malloc(sizeof(int *) * MAP_HEIGHT);
-	if (!parsing->map)
-		exit(1); // or handle error
-	for (int i = 0; i < MAP_HEIGHT; i++) {
-		parsing->map[i] = malloc(sizeof(int) * MAP_WIDTH);
-		if (!parsing->map[i])
-    		exit(1); // or handle error
-		for (int j = 0; j < MAP_WIDTH; j++) {
-    		parsing->map[i][j] = worldMap[i][j];
-		}
-	}
-}
+// 	data->parsing = malloc(sizeof(t_parse));
+// 	parsing = data->parsing;
+// 	parsing->map = malloc(sizeof(int *) * MAP_HEIGHT);
+// 	if (!parsing->map)
+// 		exit(1); // or handle error
+// 	for (int i = 0; i < MAP_HEIGHT; i++) {
+// 		parsing->map[i] = malloc(sizeof(int) * MAP_WIDTH);
+// 		if (!parsing->map[i])
+//     		exit(1); // or handle error
+// 		for (int j = 0; j < MAP_WIDTH; j++) {
+//     		parsing->map[i][j] = worldMap[i][j];
+// 		}
+// 	}
+// }
 
 // Parsing test ^
 
 // change this location max
-int	parse_cub(char *path, t_data *data)
+
+static int	parse(char *path, t_data *data)
 {
 	char	**content;
 	int		index;
 
-	content = extract_content(path);
-	if (!content)
-		return (write(1, "Error\nInvalid file\n", 20), 0);
-	if (!check_content(content) || !color_and_texture(data, content))
-		return (free_darray(content), 0);
-	index = check_for_map(content);
-	if (!index || !parse_map(data, content + index, index))
-		return (free_darray(content), 0);
+	content = extract_f(path);
+	if (content == NULL)
+		return (printf("Error\nThe file wasn't found.\n"), -1);
+	if (validate_content(content) < 0
+		|| texture_n_colors(data, content) < 0)
+		return (free_darray(content), -1);
+	index = find_start(content);
+	if (index == -1)
+		printf("Error: No valid map found in the file.\n");
+	if (index == -1 || parse_map(data, content + index, index) == -1)
+		return (free_darray(content), -1);
 	free_darray(content);
-	return (1);
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	(void) argc;
-	(void) argv;
 
-	// if (argc != 2)
-	// 	write(1, "Error\nUsage: ./cub3d <path_to_cub_file>\n", 35), exit(EF);
-	// if (ft_strnstr(argv[1], ".cub", 5))
-	// 	write(1, "Error\nInvalid file extension\n", 30), exit(EF);
-	// ft_memset(&data, 0, sizeof(t_data));
-	// if (!parse_cub(argv[1], &data))
-	// 	free(&data),write(1, "Error\nParsing failed\n", 22), exit(EF);
-	init(&data);
-	test_init_parsing(&data);
-	test_init_player(&data);
-	game_start(&data);
+	if (argc != 2)
+		return (printf("Error\nUsage: ./cub3d_parser <path_to_cub_file>\n"), 1);
+	if (!ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
+		return (printf("Error\nIncorrect file name\n"), 2);
+	ft_memset(&data, 0, sizeof(data));
+	data.mlx = mlx_init();
+	if (!data.mlx)
+		return (printf("Error\nMLX failed\n"), -1);
+	if (parse(argv[1], &data) == -1)
+		return (free(data.mlx), -1);
+	// Note: Need to handle broken xpm
+	// Note: Don't forget to free the allocated memory for the map and other structures
+	// DEBUGGING //
+	printf("Parsing done.\n");
+	printf("Map:\n");
+	for (int i = 0; i < data.map_height; i++)
+	{
+		for (int j = 0; j < data.map_width; j++)
+			printf("%c ", data.map[i][j]);
+		printf("\n");
+	}
+	printf("Textures and colors parsed successfully.\n");
+	printf("Player position: (%lf, %lf)\n", data.plr->pos_x, data.plr->pos_y);
+	printf("Player direction: (%lf, %lf)\n", data.plr->dir_x, data.plr->dir_y);
+	printf("Player plane: (%lf, %lf)\n", data.plr->plane_x, data.plr->plane_y);
+	printf("Textures:\n");
+    printf("Floor color: 0x%06X\n", data.textures.floor);
+    printf("Ceiling color: 0x%06X\n", data.textures.ceiling); 
+	printf("Map height: %d\n", data.map_height);
+	printf("Map width: %d\n", data.map_width);
+	// init(&data);
+	// test_init_parsing(&data);
+	// test_init_player(&data);
+	// game_start(&data);
 
-	//free(data.plr);
+	// free(data.plr);
 	return (0);
 }
