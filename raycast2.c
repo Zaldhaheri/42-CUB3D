@@ -5,11 +5,11 @@ void height_Scale(t_ray *ray)
 {
 	ray->line_height = S_H / ray->wall_dst;
 	ray->draw_s = -ray->line_height / 2 + (S_H / 2);
-	if (ray->draw_s <= 0)
+	if (ray->draw_s < 0)
 		ray->draw_s = 0;
 	ray->draw_e = ray->line_height / 2 + (S_H / 2);
-	if (ray->draw_e >= S_W)
-		ray->draw_e = S_W - 1;
+	if (ray->draw_e >= S_H)
+		ray->draw_e = S_H - 1;
 }
 
 

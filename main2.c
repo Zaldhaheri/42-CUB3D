@@ -91,22 +91,47 @@ void move_forward(t_data *data, t_player *plr)
 	}
 }
 
-void move_backward(t_player *plr)
+void move_backward(t_data *data, t_player *plr)
 {
-	plr->pos_x -= plr->dir_x * MOVE_SPEED;
-	plr->pos_y -= plr->dir_y * MOVE_SPEED;
+	int pos_x;
+	int pos_y;
+
+	pos_x = (int) plr->pos_x - plr->dir_x * MOVE_SPEED;
+	pos_y = (int) plr->pos_y - plr->dir_y * MOVE_SPEED;
+	if (data->parsing->map[pos_y][pos_x] == 0)
+	{
+		plr->pos_x -= plr->dir_x * MOVE_SPEED;
+		plr->pos_y -= plr->dir_y * MOVE_SPEED;
+
+	}
 }
 
-void move_left(t_player *plr)
+void move_left(t_data *data, t_player *plr)
 {
-	plr->pos_x -= plr->plane_x * MOVE_SPEED;
-	plr->pos_y -= plr->plane_y * MOVE_SPEED;
+	int pos_x;
+	int pos_y;
+
+	pos_x = (int) plr->pos_x - plr->plane_x * MOVE_SPEED;
+	pos_y = (int) plr->pos_y - plr->plane_y * MOVE_SPEED;
+	if (data->parsing->map[pos_y][pos_x] == 0)
+	{
+		plr->pos_x -= plr->plane_x * MOVE_SPEED;
+		plr->pos_y -= plr->plane_y * MOVE_SPEED;
+	}
 }
 
-void move_right(t_player *plr)
+void move_right(t_data *data, t_player *plr)
 {
-	plr->pos_x += plr->plane_x * MOVE_SPEED;
-	plr->pos_y += plr->plane_y * MOVE_SPEED;
+	int pos_x;
+	int pos_y;
+
+	pos_x = plr->pos_x + plr->plane_x * MOVE_SPEED;
+	pos_y = plr->pos_y + plr->plane_y * MOVE_SPEED;
+	if (data->parsing->map[pos_y][pos_x] == 0)
+	{
+		plr->pos_x += plr->plane_x * MOVE_SPEED;
+		plr->pos_y += plr->plane_y * MOVE_SPEED;
+	}
 }
 
 int hook_keys(int key, t_data *data)
@@ -135,17 +160,17 @@ int hook_keys(int key, t_data *data)
 	else if (key == 0) //A
 	{
 		printf("move left\n");
-		move_left(data->plr);
+		move_left(data, data->plr);
 	}
 	else if (key == 1) //S
 	{
 		printf("move backward\n");
-		move_backward(data->plr);
+		move_backward(data, data->plr);
 	}
 	else if (key == 2) //D
 	{
 		printf("move right\n");
-		move_right(data->plr);
+		move_right(data, data->plr);
 	}
 	else
 		printf("key: %d\n", key);

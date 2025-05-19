@@ -40,7 +40,7 @@
 # define C_FLOOR 0x1A9D0D
 # define C_CEILING 0x335DFF
 
-# define ROT_SPEED 0.04
+# define ROT_SPEED 0.1
 # define MOVE_SPEED 0.1
 
 /*
