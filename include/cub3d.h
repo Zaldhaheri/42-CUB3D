@@ -137,6 +137,7 @@ int	count_chars(const char *str, char ch);
 int	parse_map(t_data *cub3d, char **data, int i);
 int	check_walls(t_data *cub3d);
 int	find_start(char **f_data);
+int	parse(char *path, t_data *data);
 
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);

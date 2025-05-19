@@ -112,3 +112,23 @@ int	parse_map(t_data *data, char **content, int i)
 		return (-1);
 	return (0);
 }
+
+int	parse(char *path, t_data *data)
+{
+	char	**content;
+	int		index;
+
+	content = extract_f(path);
+	if (content == NULL)
+		return (printf("Error\nThe file wasn't found.\n"), -1);
+	if (validate_content(content) < 0
+		|| texture_n_colors(data, content) < 0)
+		return (free_darray(content), -1);
+	index = find_start(content);
+	if (index == -1)
+		printf("Error: No valid map found in the file.\n");
+	if (index == -1 || parse_map(data, content + index, index) == -1)
+		return (free_darray(content), -1);
+	free_darray(content);
+	return (0);
+}
