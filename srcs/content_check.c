@@ -1,6 +1,10 @@
 #include "../include/cub3d.h"
 
 
+/*
+ * Function to set a flag in the flags array
+ * Returns 0 on success or -1 on error
+ */
 static int	set_flag(bool *flag, char *identifier)
 {
 	if (*flag)
@@ -9,6 +13,10 @@ static int	set_flag(bool *flag, char *identifier)
 	return (0);
 }
 
+/*
+ * Function to count the number of lines in a file
+ * Returns the number of lines or -1 on error
+ */
 static int	count_lines(const char *path)
 {
 	int		fd;
@@ -30,6 +38,10 @@ static int	count_lines(const char *path)
 	return (count_lines);
 }
 
+/*
+ * Function to extract the content of a file into an array of strings
+ * Returns a pointer to the array or NULL on error
+ */
 char	**extract_f(const char *path)
 {
 	int		fd;
@@ -56,6 +68,10 @@ char	**extract_f(const char *path)
 	return (content);
 }
 
+/*
+ * Function to check for missing flags in the file
+ * Returns 0 on success or -1 on error
+ */
 static int	check_missing_flags(bool *flags)
 {
 	const char	*characters[6];
@@ -75,6 +91,10 @@ static int	check_missing_flags(bool *flags)
 	return (0);
 }
 
+/*
+ * Function to check for duplicate flags in the file
+ * Returns 0 on success or -1 on error
+ */
 static int	check_flags(char *line, bool *flags)
 {
 	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "NO\t", 3))
@@ -92,6 +112,11 @@ static int	check_flags(char *line, bool *flags)
 	return (0);
 }
 
+/*
+ * Function to validate the content of the file
+ * Checks for duplicate flags and missing flags
+ * Returns 0 on success or -1 on error
+ */
 int	validate_content(char **f_data)
 {
 	int		index;

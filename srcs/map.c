@@ -1,5 +1,8 @@
 #include "../include/cub3d.h"
 
+/* 
+ * Function to update the player's fov direction based on character in map
+ */
 static void	init_camera(char character, t_data *data)
 {
 	if (character == 'N')
@@ -28,6 +31,10 @@ static void	init_camera(char character, t_data *data)
 	}
 }
 
+/*
+ * Function to create the map from the parsed content into a 2D array.
+ * Returns 0 on success or -1 on error
+ */
 static int	create_map(t_data *data, char **map)
 {
 	int		i;
@@ -57,6 +64,11 @@ static int	create_map(t_data *data, char **map)
 	return (0);
 }
 
+/*
+ * Function to check if the map contains valid characters, also sets the
+ * player position and direction, and initializes the camera.
+ * Returns 0 on success or -1 on error
+ */
 static int	valid_map_chars(char **content, int i, int *p_found, t_data *data)
 {
     int	j;
@@ -89,6 +101,10 @@ static int	valid_map_chars(char **content, int i, int *p_found, t_data *data)
     return (0);
 }
 
+/*
+ * Function to parse the map and check for valid characters, walls, and player
+ * Returns 0 on success or -1 on error
+ */
 int	parse_map(t_data *data, char **content, int i)
 {
 	int	player;
@@ -113,6 +129,15 @@ int	parse_map(t_data *data, char **content, int i)
 	return (0);
 }
 
+/*
+ * parse() function:
+ * 1. Extracts the content of the file.
+ * 2. Validates the content.
+ * 3. Sets the textures and colors.
+ * 4. Finds the start of the map.
+ * 5. Parses the map.
+ * 6. Cleans up and returns success or failure.
+ */
 int	parse(char *path, t_data *data)
 {
 	char	**content;

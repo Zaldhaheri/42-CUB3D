@@ -1,6 +1,9 @@
 #include "../include/cub3d.h"
 
-
+/*
+ * Function to count the number of occurrences of a character in a string
+ * Returns the count of occurrences
+ */
 int	count_chars(const char *str, char character)
 {
 	int	count;
@@ -15,6 +18,10 @@ int	count_chars(const char *str, char character)
 	return (count);
 }
 
+/*
+ * Function to split a string into an array based on the color identifier
+ * Returns a pointer to the array or NULL on error
+ */
 char	**color_split(char *s)
 {
 	int	index;
@@ -35,8 +42,10 @@ char	**color_split(char *s)
 		return (NULL);
 	return (ft_split(s + index, ','));
 }
-
-
+/*
+ * Function to set colors in the data struct
+ * Returns 0 on success or -1 on error
+ */
 int	use_atoi(t_data *data, char **colors, char texture)
 {
 	int	color[3];

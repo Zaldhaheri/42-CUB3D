@@ -1,5 +1,9 @@
 #include "../include/cub3d.h"
 
+/*
+ * Function that sets the color in .cub to the data struct variable
+ * Returns the count of occurrences
+ */
 static int	set_color(t_data *data, char *texture)
 {
 	char	**split_string;
@@ -26,6 +30,10 @@ static int	set_color(t_data *data, char *texture)
 	return (free_darray(split_color), total);
 }
 
+/*
+ * Function to initialize/set the xpm to a image pointer
+ * Returns 0 on success or -1 on error
+ */
 static int	initialise_textures(char *file, t_data *mlx, unsigned int texture[64][64])
 {
 	void	*img_ptr;
@@ -52,7 +60,10 @@ static int	initialise_textures(char *file, t_data *mlx, unsigned int texture[64]
 	return (0);
 }
 
-
+/*
+ * Function to check what texture to set
+ * Returns 0 on success or -1 on error
+ */
 int	set_texture(t_data *data, char **split)
 {
 	char	*path;
@@ -73,6 +84,10 @@ int	set_texture(t_data *data, char **split)
 	return (0);
 }
 
+/*
+ * Function to handle setting the textures and colors
+ * Returns 0 on success or -1 on error
+ */
 int	texture_n_colors(t_data *data, char **f_data)
 {
 	int		index;

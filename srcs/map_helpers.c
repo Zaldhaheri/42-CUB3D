@@ -1,5 +1,9 @@
 #include "../include/cub3d.h"
 
+/*
+ * Function that finds the start of the map in the file
+ * Returns the count of occurrences
+ */
 int	find_start(char **f_data)
 {
 	int	index;
@@ -20,6 +24,10 @@ int	find_start(char **f_data)
 	return (-1);
 }
 
+/*
+ * Function to check if the map is enclosed by walls
+ * Returns 0 on success or -1 on error
+ */
 int	check_walls(t_data *data)
 {
 	int	index;
