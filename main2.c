@@ -78,59 +78,54 @@ void look_right(t_player *plr)
 
 void move_forward(t_data *data, t_player *plr)
 {
-	int pos_x;
-	int pos_y;
+	double pos_x;
+	double pos_y;
 
-	pos_x = (int) plr->pos_x + plr->dir_x * MOVE_SPEED;
-	pos_y = (int) plr->pos_y + plr->dir_y * MOVE_SPEED;
-	if (data->parsing->map[pos_y][pos_x] == 0)
-	{
-		plr->pos_x += plr->dir_x * MOVE_SPEED;
-		plr->pos_y += plr->dir_y * MOVE_SPEED;
-	}
+	pos_x = plr->pos_x + plr->dir_x * MOVE_SPEED;
+	pos_y = plr->pos_y + plr->dir_y * MOVE_SPEED;
+	if (data->map[(int) plr->pos_y][(int) pos_x] == '0')
+		plr->pos_x = pos_x;
+	if (data->map[(int) pos_y][(int) plr->pos_x] == '0')
+		plr->pos_y = pos_y;
 }
 
 void move_backward(t_data *data, t_player *plr)
 {
-	int pos_x;
-	int pos_y;
+	double pos_x;
+	double pos_y;
 
-	pos_x = (int) plr->pos_x - plr->dir_x * MOVE_SPEED;
-	pos_y = (int) plr->pos_y - plr->dir_y * MOVE_SPEED;
-	if (data->parsing->map[pos_y][pos_x] == 0)
-	{
-		plr->pos_x -= plr->dir_x * MOVE_SPEED;
-		plr->pos_y -= plr->dir_y * MOVE_SPEED;
-
-	}
+	pos_x = plr->pos_x - plr->dir_x * MOVE_SPEED;
+	pos_y = plr->pos_y - plr->dir_y * MOVE_SPEED;
+	if (data->map[(int) plr->pos_y][(int) pos_x] == '0')
+		plr->pos_x = pos_x;
+	if (data->map[(int) pos_y][(int) plr->pos_x] == '0')
+		plr->pos_y = pos_y;
 }
 
 void move_left(t_data *data, t_player *plr)
 {
-	int pos_x;
-	int pos_y;
+	double pos_x;
+	double pos_y;
 
-	pos_x = (int) plr->pos_x - plr->plane_x * MOVE_SPEED;
-	pos_y = (int) plr->pos_y - plr->plane_y * MOVE_SPEED;
-	if (data->parsing->map[pos_y][pos_x] == 0)
-	{
-		plr->pos_x -= plr->plane_x * MOVE_SPEED;
-		plr->pos_y -= plr->plane_y * MOVE_SPEED;
-	}
+	pos_x = plr->pos_x - plr->plane_x * MOVE_SPEED;
+	pos_y = plr->pos_y - plr->plane_y * MOVE_SPEED;
+	if (data->map[(int) plr->pos_y][(int) pos_x] == '0')
+		plr->pos_x = pos_x;
+	if (data->map[(int) pos_y][(int) plr->pos_x] == '0')
+		plr->pos_y = pos_y;
 }
 
 void move_right(t_data *data, t_player *plr)
 {
-	int pos_x;
-	int pos_y;
+	double pos_x;
+	double pos_y;
 
 	pos_x = plr->pos_x + plr->plane_x * MOVE_SPEED;
 	pos_y = plr->pos_y + plr->plane_y * MOVE_SPEED;
-	if (data->parsing->map[pos_y][pos_x] == 0)
-	{
-		plr->pos_x += plr->plane_x * MOVE_SPEED;
-		plr->pos_y += plr->plane_y * MOVE_SPEED;
-	}
+	if (data->map[(int) plr->pos_y][(int) pos_x] == '0')
+		plr->pos_x = pos_x;
+	if (data->map[(int) pos_y][(int) plr->pos_x] == '0')
+		plr->pos_y = pos_y;
 }
 
 int hook_keys(int key, t_data *data)

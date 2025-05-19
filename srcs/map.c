@@ -4,26 +4,26 @@ static void	init_camera(char character, t_data *data)
 {
 	if (character == 'N')
 	{
-		data->plr->dir_x = 1 * 0.57735026919;
-		data->plr->dir_y = 0 * -0.57735026919;
+		data->plr->dir_x = 0;
+		data->plr->dir_y = -1;
 		data->plr->orientation = 90;
 	}
 	else if (character == 'S')
 	{
-		data->plr->dir_x = -1 * 0.57735026919;
-		data->plr->dir_y = 0 * -0.57735026919;
+		data->plr->dir_x = 0;
+		data->plr->dir_y = 1;
 		data->plr->orientation = 270;
 	}
 	else if (character == 'W')
 	{
-		data->plr->dir_x = 0 * 0.57735026919;
-		data->plr->dir_y = -1 * -0.57735026919;
+		data->plr->dir_x = -1;
+		data->plr->dir_y = 0;
 		data->plr->orientation = 180;
 	}
 	else if (character == 'E')
 	{
-		data->plr->dir_x = 0 * 0.57735026919;
-		data->plr->dir_y = 1 * -0.57735026919;
+		data->plr->dir_x = 1;
+		data->plr->dir_y = 0;
 		data->plr->orientation = 0;
 	}
 }
@@ -74,6 +74,7 @@ static int	valid_map_chars(char **content, int i, int *p_found, t_data *data)
                 data->plr->pos_x = j + 0.5;
                 data->plr->pos_y = i + 0.5;
                 init_camera(content[i][j], data);
+				update_plane(data->plr);
             }
             content[i][j] = '0';
             (*p_found)++;

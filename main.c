@@ -2,35 +2,35 @@
 
 // Prototype parsing
 
-#define MAP_WIDTH 10
-#define MAP_HEIGHT 10
+// #define MAP_WIDTH 10
+// #define MAP_HEIGHT 10
 
-int worldMap[MAP_HEIGHT][MAP_WIDTH] = {
-    {1,1,1,1,1,1,1,1,1,1},
-    {1,0,0,0,0,0,0,0,0,1},
-    {1,0,1,0,0,0,0,1,0,1},
-    {1,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,0,0,1},//
-    {1,0,0,0,0,0,0,0,0,1},//
-    {1,0,0,0,0,0,0,0,0,1},
-    {1,0,0,0,0,0,0,1,0,1},
-    {1,1,0,0,0,0,0,0,1,1},
-    {1,1,1,1,1,1,1,1,1,1}
-};
+// int worldMap[MAP_HEIGHT][MAP_WIDTH] = {
+//     {1,1,1,1,1,1,1,1,1,1},
+//     {1,0,0,0,0,0,0,0,0,1},
+//     {1,0,1,0,0,0,0,1,0,1},
+//     {1,0,0,0,0,0,0,0,0,1},
+//     {1,0,0,0,0,0,0,0,0,1},//
+//     {1,0,0,0,0,0,0,0,0,1},//
+//     {1,0,0,0,0,0,0,0,0,1},
+//     {1,0,0,0,0,0,0,1,0,1},
+//     {1,1,0,0,0,0,0,0,1,1},
+//     {1,1,1,1,1,1,1,1,1,1}
+// };
 	
-// init to test my raycast (so i dont wait for parsing)
-void test_init_player(t_data *data)
-{
-	t_player	*player;
+// // init to test my raycast (so i dont wait for parsing)
+// void test_init_player(t_data *data)
+// {
+// 	t_player	*player;
 
-	data->plr = malloc(sizeof(t_player));
-	player = data->plr;
-	player->pos_x = 5.5;
-	player->pos_y = 5.5;
-	player->dir_x = -0.5;
-	player->dir_y = 0.5;
-	update_plane(player);	
-}
+// 	data->plr = malloc(sizeof(t_player));
+// 	player = data->plr;
+// 	player->pos_x = 5.5;
+// 	player->pos_y = 5.5;
+// 	player->dir_x = -0.5;
+// 	player->dir_y = 0.5;
+// 	update_plane(player);	
+// }
 
 // void test_init_parsing(t_data *data)
 // {
@@ -109,10 +109,8 @@ int	main(int argc, char **argv)
     printf("Ceiling color: 0x%06X\n", data.textures.ceiling); 
 	printf("Map height: %d\n", data.map_height);
 	printf("Map width: %d\n", data.map_width);
-	// init(&data);
-	// test_init_parsing(&data);
-	// test_init_player(&data);
-	// game_start(&data);
+	init(&data);
+	game_start(&data);
 
 	// free(data.plr);
 	return (0);
