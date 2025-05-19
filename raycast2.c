@@ -29,7 +29,7 @@ void paint(t_data *data, t_ray *ray, t_player *player, t_line *line)
 	line->x = ray->pxl_x;
 	while (y < ray->draw_s) //draw ceiling
 	{
-		my_mlx_pixel_put(data, line->x, y, C_CEILING);
+		my_mlx_pixel_put(data, line->x, y, data->textures.ceiling);
 		y++;
 	}
 	if (ray->side == NORTH)
@@ -61,7 +61,7 @@ void paint(t_data *data, t_ray *ray, t_player *player, t_line *line)
 	y = ray->draw_e;
 	while(y < S_H) //draw floor
 	{
-		my_mlx_pixel_put(data, line->x, y, C_FLOOR);
+		my_mlx_pixel_put(data, line->x, y, data->textures.floor);
 		y++;
 	}
 }
