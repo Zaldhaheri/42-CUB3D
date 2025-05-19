@@ -8,13 +8,13 @@
 int worldMap[MAP_HEIGHT][MAP_WIDTH] = {
     {1,1,1,1,1,1,1,1,1,1},
     {1,0,0,0,0,0,0,0,0,1},
-    {1,0,1,0,0,0,0,1,1,1},
-    {1,0,0,0,0,0,0,0,1,1},
-    {1,1,0,0,0,0,0,0,0,1}, //5
-    {1,0,0,0,0,0,1,1,1,1},
+    {1,0,1,0,0,0,0,1,0,1},
     {1,0,0,0,0,0,0,0,0,1},
-    {1,0,1,0,0,0,0,0,0,1},
-    {1,0,0,0,0,1,1,0,0,1},
+    {1,0,0,0,0,0,0,0,0,1},//
+    {1,0,0,0,0,0,0,0,0,1},//
+    {1,0,0,0,0,0,0,0,0,1},
+    {1,0,0,0,0,0,0,1,0,1},
+    {1,1,0,0,0,0,0,0,1,1},
     {1,1,1,1,1,1,1,1,1,1}
 };
 	
@@ -25,13 +25,11 @@ void test_init_player(t_data *data)
 
 	data->plr = malloc(sizeof(t_player));
 	player = data->plr;
-	player->pos_x = 5.0;
-	player->pos_y = 5.0; //x y starting positions
-	player->dir_x = -1;
-	player->dir_y = 0.5; //direction of the vector
-	player->plane_x = 0;
-	player->plane_y = 0.9; //camera plane
-	
+	player->pos_x = 5.5;
+	player->pos_y = 5.5;
+	player->dir_x = -0.5;
+	player->dir_y = 0.5;
+	update_plane(player);	
 }
 
 // void test_init_parsing(t_data *data)
