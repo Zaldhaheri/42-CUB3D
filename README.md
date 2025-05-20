@@ -7,6 +7,3 @@
  - Black - Top
  - Dark Green - Bottom
   
-## Parsing passing to processing:
-- Double array (map)
-- What else?

@@ -103,12 +103,12 @@ int	texture_n_colors(t_data *data, char **f_data)
 		if (!split || !split[0])
 			continue ;
 		if (set_texture(data, split) == -1)
-			return (printf("Error: Failed to set texture for %s\n", split[0]),
-				free_darray(split), -1);
+			(printf("Error\nFailed to set texture: %s\n", split[0]),
+				free_darray(split), free(data->mlx), exit(1));
 		if ((!ft_strcmp(split[0], "F") || !ft_strcmp(split[0], "C"))
 			&& !set_color(data, f_data[index]))
-			return (printf("Error: Failed to set color for %s\n", split[0]),
-				free_darray(split), -1);
+			(printf("Error\nFailed to set color: %s\n", split[0]),
+				free_darray(split), free(data->mlx), exit(1));
 	}
 	return (free_darray(split), 0);
 }
