@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:17:48 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/20 15:26:26 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:14:59 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,15 @@ int	hook_keys(int key, t_data *data)
 		look_left(data->plr);
 	else if (key == 124)
 		look_right(data->plr);
-	else if (key == 13)
+	else if (key == 13 || key == 126)
 		move_forward(data, data->plr);
 	else if (key == 0)
 		move_left(data, data->plr);
-	else if (key == 1)
+	else if (key == 1 || key == 125)
 		move_backward(data, data->plr);
 	else if (key == 2)
 		move_right(data, data->plr);
+	else
+		printf("%d\n", key);
 	return (0);
 }
