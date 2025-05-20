@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texturing_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:20:32 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/20 15:22:10 by mbabayan         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:07:53 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,31 @@ static int	set_color(t_data *data, char *texture)
 static int	initialise_textures(char *file, t_data *mlx,
 	unsigned int texture[TEX_SIZE][TEX_SIZE])
 {
-	void	*img_ptr;
-	char	*add;
-	int		stuff[3];
-	int		index;
-	int		jindex;
+	(void) file;
+	(void) mlx;
+	(void) texture;
+	// void	*img_ptr;
+	// char	*add;
+	// int		stuff[3];
+	// int		index;
+	// int		jindex;
 
-	if (ft_strncmp(file + ft_strlen(file) - 4, ".xpm", 5))
-		return (printf("Error\nInvalid texture file extension.\n"), -1);
-	img_ptr = NULL;
-	img_ptr = mlx_xpm_file_to_image(mlx->mlx, file, stuff + 1, stuff + 2);
-	if (!img_ptr)
-		return (-1);
-	add = mlx_get_data_addr(img_ptr, stuff, stuff + 1, stuff + 2);
-	index = -1;
-	while (++index < TEX_SIZE)
-	{
-		jindex = -1;
-		while (++jindex < TEX_SIZE)
-			texture[jindex][index] = *(unsigned int *)(add + index
-					* stuff[1] + jindex * (stuff[0] / 8));
-	}
-	mlx_destroy_image(mlx->mlx, img_ptr);
+	// if (ft_strncmp(file + ft_strlen(file) - 4, ".xpm", 5))
+	// 	return (printf("Error\nInvalid texture file extension.\n"), -1);
+	// // img_ptr = NULL;
+	// // img_ptr = mlx_xpm_file_to_image(mlx->mlx, file, stuff + 1, stuff + 2);
+	// // if (!img_ptr)
+	// // 	return (-1);
+	// // add = mlx_get_data_addr(img_ptr, stuff, stuff + 1, stuff + 2);
+	// index = -1;
+	// // while (++index < TEX_SIZE)
+	// // {
+	// // 	jindex = -1;
+	// // 	while (++jindex < TEX_SIZE)
+	// // 		texture[jindex][index] = *(unsigned int *)(add + index
+	// // 				* stuff[1] + jindex * (stuff[0] / 8));
+	// // }
+	// // mlx_destroy_image(mlx->mlx, img_ptr);
 	return (0);
 }
 

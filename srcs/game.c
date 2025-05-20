@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:17:07 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/20 19:27:03 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/20 20:06:29 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void	init(t_data *data)
 {
-	data->win = mlx_new_window(data->mlx, S_W, S_H, "CUB3D");
-	data->img = mlx_new_image(data->mlx, S_W, S_H);
-	data->addr = mlx_get_data_addr(data->img,
-			&data->bits_per_pixel, &data->line_length, &data->endian);
+	// data->win = mlx_new_window(data->mlx, S_W, S_H, "CUB3D");
+	// data->img = mlx_new_image(data->mlx, S_W, S_H);
+	// data->addr = mlx_get_data_addr(data->img,
+	// 		&data->bits_per_pixel, &data->line_length, &data->endian);
 	data->line = malloc(sizeof(t_line));
 	if (!data->line)
 	{
@@ -47,11 +47,12 @@ void	update_plane(t_player *plr)
 
 void	game_start(t_data *data)
 {
-	mlx_hook(data->win, 2, 1L << 0, hook_keys, data);
-	mlx_hook(data->win, 17, 0, hook_exit, data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-	mlx_loop_hook(data->mlx, rendering, data);
-	mlx_loop(data->mlx);
+	(void) data;
+	// mlx_hook(data->win, 2, 1L << 0, hook_keys, data);
+	// mlx_hook(data->win, 17, 0, hook_exit, data);
+	// mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	// mlx_loop_hook(data->mlx, rendering, data);
+	// mlx_loop(data->mlx);
 }
 
 int	rendering(void *param)
@@ -72,7 +73,7 @@ int	rendering(void *param)
 	{
 		raycast(data, ray);
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	// mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	free(ray);
 	return (0);
 }

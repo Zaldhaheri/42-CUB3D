@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:12:28 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/20 17:36:28 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:42:18 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,21 +114,21 @@ typedef struct s_textures
 // Main struct
 typedef struct s_data
 {
-	char			**map;
+	char			**map; //// RESOURCE(RESOURCE)
 	int				map_height;
 	int				map_width;
 	unsigned	int	(*tex)[TEX_SIZE];
-	void			*mlx;
-	void			*win;
-	void			*img;
-	char			*addr;
+	void			*mlx; //// RESOURCE
+	void			*win; //// RESOURCE
+	void			*img; //// RESOURCE
+	char			*addr; //// RESOURCE
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
-	t_player		*plr;
-	t_ray			*ray;
-	t_line			*line;
-	t_textures		textures;
+	t_player		*plr; //// RESOURCE
+	t_ray			*ray; //// RESOURCE
+	t_line			*line; //// RESROURCE
+	t_textures		textures; //// RESOURCE
 }	t_data;
 
 /*
