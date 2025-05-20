@@ -1,7 +1,7 @@
-NO ./Textures/n1.xpm
-SO ./Textures/s1.xpm
-WE ./Textures/w1.xpm
-EA ./Textures/e1.xpm
+NO ./texturesLand/n.xpm
+SO ./texturesLand/s.xpm
+WE ./texturesLand/w.xpm
+EA ./texturesLand/e.xpm
 
 F 0,0,0
 C 255,192,203
