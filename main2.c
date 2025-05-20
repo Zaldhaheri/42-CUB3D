@@ -132,53 +132,32 @@ int hook_keys(int key, t_data *data)
 {
 	if (key == 53)
 	{
-		printf("ESC, Exiting\n");
 		mlx_destroy_window(data->mlx, data->win);
 		exit(0);
 	}
-	else if (key == 123) //<-
-	{
-		printf("look left\n");
+	else if (key == 123)
 		look_left(data->plr);
-	}
-	else if (key == 124) //->
-	{
-		printf("look right\n");
+	else if (key == 124)
 		look_right(data->plr);
-	}
-	else if (key == 13) //W
-	{
-		printf("move forward\n");
+	else if (key == 13)
 		move_forward(data, data->plr);
-	}
-	else if (key == 0) //A
-	{
-		printf("move left\n");
+	else if (key == 0)
 		move_left(data, data->plr);
-	}
-	else if (key == 1) //S
-	{
-		printf("move backward\n");
+	else if (key == 1)
 		move_backward(data, data->plr);
-	}
-	else if (key == 2) //D
-	{
-		printf("move right\n");
+	else if (key == 2)
 		move_right(data, data->plr);
-	}
-	else
-		printf("key: %d\n", key);
 	return (0);
 }
 
-int hook_exit(t_data *data)
+int	hook_exit(t_data *data)
 {
 	printf("Window exit\n");
 	mlx_destroy_window(data->mlx, data->win);
 	exit(0);
 }
 
-void game_start(t_data *data)
+void	game_start(t_data *data)
 {
 	mlx_hook(data->win, 2, 1L << 0, hook_keys, data);
 	mlx_hook(data->win, 17, 0, hook_exit, data);
@@ -187,11 +166,10 @@ void game_start(t_data *data)
 	mlx_loop(data->mlx);
 }
 
-// Runs on the loop hook, casts the rays and puts image to window
-int rendering(void *param)
+int	rendering(void *param)
 {
-	t_data *data;
-	t_ray *ray;
+	t_data	*data;
+	t_ray	*ray;
 
 	data = (t_data *) param;
 	ray = malloc(sizeof(t_ray));
@@ -200,9 +178,9 @@ int rendering(void *param)
 		printf("malloc error ray\n");
 		return (1);
 	}
-	memset(ray, 0, sizeof(t_ray)); //temp function
+	memset(ray, 0, sizeof(t_ray));
 	ray->pxl_x = 0;
-	while (ray->pxl_x < S_W) //loops over every pixel in width
+	while (ray->pxl_x < S_W)
 	{
 		raycast(data, ray);
 	}
@@ -210,6 +188,3 @@ int rendering(void *param)
 	free(ray);
 	return (0);
 }
-
-// runs the game
-
