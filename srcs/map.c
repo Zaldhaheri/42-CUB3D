@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/20 15:14:52 by mbabayan          #+#    #+#             */
+/*   Updated: 2025/05/20 15:18:53 by mbabayan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 /* 
@@ -71,34 +83,34 @@ static int	create_map(t_data *data, char **map)
  */
 static int	valid_map_chars(char **content, int i, int *p_found, t_data *data)
 {
-    int	j;
+	int	j;
 
-    j = -1;
-    while (content[i][++j])
-    {
-        if (ft_strchr("SNWE", content[i][j]))
-        {
-            if (*p_found == 0) // Only allocate and set once!
-            {
-                data->plr = malloc(sizeof(t_player));
-                if (!data->plr)
-                    return (printf("Error\nMalloc failed for player\n"), -1);
-                data->plr->pos_x = j + 0.5;
-                data->plr->pos_y = i + 0.5;
-                init_camera(content[i][j], data);
+	j = -1;
+	while (content[i][++j])
+	{
+		if (ft_strchr("SNWE", content[i][j]))
+		{
+			if (*p_found == 0)
+			{
+				data->plr = malloc(sizeof(t_player));
+				if (!data->plr)
+					return (printf("Error\nMalloc failed for player\n"), -1);
+				data->plr->pos_x = j + 0.5;
+				data->plr->pos_y = i + 0.5;
+				init_camera(content[i][j], data);
 				update_plane(data->plr);
-            }
-            content[i][j] = '0';
-            (*p_found)++;
-        }
-        else if (!ft_strchr("01NSEWD \t\n", content[i][j]))
-        {
-            printf("Error\nInvalid character '%c' at position [%d][%d].\n",
-                content[i][j], i, j);
-            return (-1);
-        }
-    }
-    return (0);
+			}
+			content[i][j] = '0';
+			(*p_found)++;
+		}
+		else if (!ft_strchr("01NSEWD \t\n", content[i][j]))
+		{
+			printf("Error\nInvalid character '%c' at position [%d][%d].\n",
+				content[i][j], i, j);
+			return (-1);
+		}
+	}
+	return (0);
 }
 
 /*

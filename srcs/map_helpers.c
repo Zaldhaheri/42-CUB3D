@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_helpers.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/20 15:13:53 by mbabayan          #+#    #+#             */
+/*   Updated: 2025/05/20 15:14:30 by mbabayan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 /*
@@ -43,7 +55,8 @@ int	check_walls(t_data *data)
 		jindex = -1;
 		while (++jindex < width)
 			if (ft_strchr("0NSEWD", data->map[index][jindex])
-				&& (!index || index + 1 == height || !jindex || jindex + 1 == width
+				&& (!index || index + 1 == height || !jindex
+				|| jindex + 1 == width
 				|| !ft_strchr("WESN10D", data->map[index - 1][jindex])
 				|| !ft_strchr("WESN10D", data->map[index + 1][jindex])
 				|| !ft_strchr("WESN10D", data->map[index][jindex - 1])

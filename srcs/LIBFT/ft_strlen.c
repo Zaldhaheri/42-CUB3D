@@ -14,13 +14,12 @@
 
 // Code loops through a string of characters, for each character it
 // increments index, at the end once the loop reaches Null it returns index
-size_t ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-    size_t index;
+	size_t	index;
 
-    index = 0;
-    while (str[index] != '\0')
-        index++;
-    return (index);
+	index = 0;
+	while (str[index] != '\0')
+		index++;
+	return (index);
 }
-

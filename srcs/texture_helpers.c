@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture_helpers.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/20 15:19:15 by mbabayan          #+#    #+#             */
+/*   Updated: 2025/05/20 15:20:08 by mbabayan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 /*
@@ -42,6 +54,7 @@ char	**color_split(char *s)
 		return (NULL);
 	return (ft_split(s + index, ','));
 }
+
 /*
  * Function to set colors in the data struct
  * Returns 0 on success or -1 on error
@@ -63,5 +76,4 @@ int	use_atoi(t_data *data, char **colors, char texture)
 	else
 		return (0);
 	return (1);
-
 }

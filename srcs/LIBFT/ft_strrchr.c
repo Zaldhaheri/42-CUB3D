@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbabayan <mbabayan@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:21:02 by mbabayan          #+#    #+#             */
-/*   Updated: 2023/11/11 14:07:32 by mbabayan         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:25:08 by mbabayan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int slen;
+	int	slen;
 
 	slen = ft_strlen(s);
-
 	while (slen >= 0)
 	{
 		if (s[slen] == (char)c)

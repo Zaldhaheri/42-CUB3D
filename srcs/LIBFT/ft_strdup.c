@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+
 /*
  * Function allocates sufficient memory for a copy of a string.
  */

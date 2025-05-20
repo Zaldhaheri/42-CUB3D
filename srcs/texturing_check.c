@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texturing_check.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/20 15:20:32 by mbabayan          #+#    #+#             */
+/*   Updated: 2025/05/20 15:22:10 by mbabayan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 /*
@@ -34,7 +46,8 @@ static int	set_color(t_data *data, char *texture)
  * Function to initialize/set the xpm to a image pointer
  * Returns 0 on success or -1 on error
  */
-static int	initialise_textures(char *file, t_data *mlx, unsigned int texture[TEX_SIZE][TEX_SIZE])
+static int	initialise_textures(char *file, t_data *mlx,
+	unsigned int texture[TEX_SIZE][TEX_SIZE])
 {
 	void	*img_ptr;
 	char	*add;
@@ -54,7 +67,8 @@ static int	initialise_textures(char *file, t_data *mlx, unsigned int texture[TEX
 	{
 		jindex = -1;
 		while (++jindex < TEX_SIZE)
-			texture[jindex][index] = *(unsigned int *)(add + index * stuff[1] + jindex * (stuff[0] / 8));
+			texture[jindex][index] = *(unsigned int *)(add + index
+					* stuff[1] + jindex * (stuff[0] / 8));
 	}
 	mlx_destroy_image(mlx->mlx, img_ptr);
 	return (0);
