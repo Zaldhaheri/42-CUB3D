@@ -6,11 +6,11 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:03:05 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/20 15:03:06 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:27:11 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/cub3d.h"
+#include "../include/cub3d.h"
 
 int	main(int argc, char **argv)
 {

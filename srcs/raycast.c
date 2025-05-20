@@ -6,11 +6,11 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:32:51 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/20 15:46:14 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:27:13 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/cub3d.h"
+#include "../include/cub3d.h"
 
 void	init_ray(t_ray *ray, t_player *player)
 {

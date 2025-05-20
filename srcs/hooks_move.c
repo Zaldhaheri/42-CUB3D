@@ -6,11 +6,11 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:20:30 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/20 16:50:54 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:27:06 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/cub3d.h"
+#include "../include/cub3d.h"
 
 void	move_forward(t_data *data, t_player *plr)
 {

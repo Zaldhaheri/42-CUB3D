@@ -6,11 +6,11 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:17:48 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/20 17:14:59 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/20 19:27:09 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/cub3d.h"
+#include "../include/cub3d.h"
 
 void	normalize(double *x, double *y)
 {
