@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:14:52 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/20 15:18:53 by mbabayan         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:28:40 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,18 @@ static int	create_map(t_data *data, char **map)
 	return (0);
 }
 
+int	set_player_position(t_data *data, char dir, int x, int y)
+{
+	data->plr = malloc(sizeof(t_player));
+	if (!data->plr)
+		return (printf("Error\nMalloc failed for player\n"), -1);
+	data->plr->pos_x = x + 0.5;
+	data->plr->pos_y = y + 0.5;
+	init_camera(dir, data);
+	update_plane(data->plr);
+	return (0);
+}
+
 /*
  * Function to check if the map contains valid characters, also sets the
  * player position and direction, and initializes the camera.
@@ -92,13 +104,8 @@ static int	valid_map_chars(char **content, int i, int *p_found, t_data *data)
 		{
 			if (*p_found == 0)
 			{
-				data->plr = malloc(sizeof(t_player));
-				if (!data->plr)
-					return (printf("Error\nMalloc failed for player\n"), -1);
-				data->plr->pos_x = j + 0.5;
-				data->plr->pos_y = i + 0.5;
-				init_camera(content[i][j], data);
-				update_plane(data->plr);
+				if (set_player_position(data, content[i][j], j, i) == -1)
+					return (-1);
 			}
 			content[i][j] = '0';
 			(*p_found)++;

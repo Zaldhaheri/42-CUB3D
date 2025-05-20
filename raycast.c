@@ -1,8 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/20 15:32:51 by zaldhahe          #+#    #+#             */
+/*   Updated: 2025/05/20 15:46:14 by zaldhahe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./include/cub3d.h"
 
-
-// initializes ray variables
-void init_ray(t_ray *ray, t_player *player)
+void	init_ray(t_ray *ray, t_player *player)
 {
 	ray->cam_x = (2 * (ray->pxl_x + 0.5)) / (double) S_W - 1;
 	ray->dir_x = player->dir_x + player->plane_x * ray->cam_x;
@@ -14,15 +24,14 @@ void init_ray(t_ray *ray, t_player *player)
 	ray->hit = 0;
 }
 
-// Finds the direction of the ray and distance to the first side.
-void check_steps(t_ray *ray, t_player *player) //(origin point 0,0 is top left corner)
+void	check_steps(t_ray *ray, t_player *player)
 {
-	if (ray->dir_x >= 0) //move right
+	if (ray->dir_x >= 0)
 	{
 		ray->step_x = 1;
 		ray->sidedst_x = (ray->map_x + 1.0 - player->pos_x) * ray->delta_x;
 	}
-	else //move left
+	else
 	{
 		ray->step_x = -1;
 		ray->sidedst_x = (player->pos_x - ray->map_x) * ray->delta_x;
@@ -40,8 +49,7 @@ void check_steps(t_ray *ray, t_player *player) //(origin point 0,0 is top left c
 	}
 }
 
-// Finds the next wall side it will hit, either vertical or horizontal
-void getWallSide(t_ray *ray)
+void	get_wall_side(t_ray *ray)
 {
 	if (ray->sidedst_x <= ray->sidedst_y)
 	{
@@ -63,36 +71,35 @@ void getWallSide(t_ray *ray)
 	}
 }
 
-// DDA algorithm to find the distance of the wall it hits
-void the_DDA(t_data *data, t_ray *ray)
+void	dda(t_data *data, t_ray *ray)
 {
-	while(!ray->hit)
+	while (!ray->hit)
 	{
-		getWallSide(ray);
+		get_wall_side(ray);
 		if (data->map[ray->map_y][ray->map_x] == '1')
-    {
+		{
 			ray->hit = 1;
 			if (ray->side == EAST || ray->side == WEST)
-				ray->wall_dst = (ray->map_x - data->plr->pos_x + (1 - ray->step_x) / 2.0) / ray->dir_x;
+				ray->wall_dst = (ray->map_x - data->plr->pos_x
+						+ (1 - ray->step_x) / 2.0) / ray->dir_x;
 			else
-				ray->wall_dst = (ray->map_y - data->plr->pos_y + (1 - ray->step_y) / 2.0) / ray->dir_y;
-		
+				ray->wall_dst = (ray->map_y - data->plr->pos_y
+						+ (1 - ray->step_y) / 2.0) / ray->dir_y;
 		}
-
 	}
 }
-// calculations for each ray
-void raycast(t_data *data, t_ray *ray)
+
+void	raycast(t_data *data, t_ray *ray)
 {
-	t_player *player;
-	t_line	*line;
+	t_player	*player;
+	t_line		*line;
 
 	player = data->plr;
 	line = data->line;
 	init_ray(ray, player);
 	check_steps(ray, player);
-	the_DDA(data, ray);
-	height_Scale(ray);
-	paint(data, ray, player, line);
+	dda(data, ray);
+	height_scale(ray);
+	paint(data, ray, line);
 	ray->pxl_x++;
 }
