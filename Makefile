@@ -1,6 +1,6 @@
 NAME = cub3d
 
-SRC = main.c game.c hooks.c hooks_move.c raycast.c raycast2.c srcs/content_check.c srcs/map.c srcs/texturing_check.c srcs/utils_2.c srcs/map_helpers.c srcs/texture_helpers.c
+SRC = main.c game.c hooks.c hooks_move.c raycast.c raycast2.c srcs/content_check.c srcs/map.c srcs/parse.c srcs/texturing_check.c srcs/utils_2.c srcs/map_helpers.c srcs/texture_helpers.c
 
 OBJ = $(SRC:.c=.o)
 

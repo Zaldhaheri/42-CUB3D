@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:14:52 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/20 16:28:40 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:26:36 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,34 +145,5 @@ int	parse_map(t_data *data, char **content, int i)
 	if (player != 1 || create_map(data, content)
 		|| check_walls(data))
 		return (-1);
-	return (0);
-}
-
-/*
- * parse() function:
- * 1. Extracts the content of the file.
- * 2. Validates the content.
- * 3. Sets the textures and colors.
- * 4. Finds the start of the map.
- * 5. Parses the map.
- * 6. Cleans up and returns success or failure.
- */
-int	parse(char *path, t_data *data)
-{
-	char	**content;
-	int		index;
-
-	content = extract_f(path);
-	if (content == NULL)
-		return (printf("Error\nThe file wasn't found.\n"), -1);
-	if (validate_content(content) < 0
-		|| texture_n_colors(data, content) < 0)
-		return (free_darray(content), -1);
-	index = find_start(content);
-	if (index == -1)
-		printf("Error: No valid map found in the file.\n");
-	if (index == -1 || parse_map(data, content + index, index) == -1)
-		return (free_darray(content), -1);
-	free_darray(content);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:12:28 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/20 16:49:49 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:36:28 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 
 # define ROT_SPEED 0.1
 # define MOVE_SPEED 0.1
-# define COLLISION_MARGIN 0.3
+# define COLLISION_MARGIN 0.25
 
 /*
 	Structs
