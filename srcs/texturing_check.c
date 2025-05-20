@@ -34,7 +34,7 @@ static int	set_color(t_data *data, char *texture)
  * Function to initialize/set the xpm to a image pointer
  * Returns 0 on success or -1 on error
  */
-static int	initialise_textures(char *file, t_data *mlx, unsigned int texture[64][64])
+static int	initialise_textures(char *file, t_data *mlx, unsigned int texture[TEX_SIZE][TEX_SIZE])
 {
 	void	*img_ptr;
 	char	*add;
@@ -50,10 +50,10 @@ static int	initialise_textures(char *file, t_data *mlx, unsigned int texture[64]
 		return (-1);
 	add = mlx_get_data_addr(img_ptr, stuff, stuff + 1, stuff + 2);
 	index = -1;
-	while (++index < 64)
+	while (++index < TEX_SIZE)
 	{
 		jindex = -1;
-		while (++jindex < 64)
+		while (++jindex < TEX_SIZE)
 			texture[jindex][index] = *(unsigned int *)(add + index * stuff[1] + jindex * (stuff[0] / 8));
 	}
 	mlx_destroy_image(mlx->mlx, img_ptr);

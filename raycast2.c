@@ -18,7 +18,7 @@ void paint(t_data *data, t_ray *ray, t_player *player, t_line *line)
 {
 	(void)player;
 	int y;
-	unsigned int (*tex)[64];
+	unsigned int (*tex)[TEX_SIZE];
 	double wall_x;
 	int tex_x;
 	int d;
@@ -41,20 +41,20 @@ void paint(t_data *data, t_ray *ray, t_player *player, t_line *line)
 	else if (ray->side == WEST)
 		tex = data->textures.west;
 
-	if (ray->side == EAST || ray->side == WEST)
-		wall_x = data->plr->pos_y + ray->wall_dst * ray->dir_y;
-	else
+	if (ray->side == NORTH || ray->side == SOUTH)
 		wall_x = data->plr->pos_x + ray->wall_dst * ray->dir_x;
+	else
+		wall_x = data->plr->pos_y + ray->wall_dst * ray->dir_y;
 	wall_x -= (int) wall_x;
-	tex_x = (int) (wall_x * 64);
+	tex_x = (int) (wall_x * TEX_SIZE);
 	if (ray->side == EAST || ray->side == SOUTH)
-		tex_x = 64 - tex_x - 1;
+		tex_x = TEX_SIZE - tex_x - 1;
 	y = ray->draw_s;
 	while (y < ray->draw_e)
 	{
 		d = y * 256 - S_H * 128 + ray->line_height * 128;
-		tex_y = ((d * 64) / ray->line_height) / 256;
-		color = tex[tex_y][tex_x];
+		tex_y = ((d * TEX_SIZE) / ray->line_height) / 256;
+		color = tex[TEX_SIZE - 1 - tex_x][tex_y];
 		my_mlx_pixel_put(data, line->x, y, color);
 		y++;
 	}

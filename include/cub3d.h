@@ -33,13 +33,14 @@
 
 # define S_W 1800 // screen  width
 # define S_H 1000 // Screen height
-# define FOV 0.60 //FOV
+# define FOV 0.69 //FOV
 # define NORTH 2
 # define SOUTH 3
 # define EAST 4
 # define WEST 5
 # define C_FLOOR 0x1A9D0D
 # define C_CEILING 0x335DFF
+# define TEX_SIZE 160
 
 # define ROT_SPEED 0.1
 # define MOVE_SPEED 0.1
@@ -94,11 +95,10 @@ typedef struct s_ray
 
 typedef struct s_textures
 {
-	unsigned int	door[64][64];
-	unsigned int	east[64][64];
-	unsigned int	north[64][64];
-	unsigned int	south[64][64];
-	unsigned int	west[64][64];
+	unsigned int	east[TEX_SIZE][TEX_SIZE];
+	unsigned int	north[TEX_SIZE][TEX_SIZE];
+	unsigned int	south[TEX_SIZE][TEX_SIZE];
+	unsigned int	west[TEX_SIZE][TEX_SIZE];
 	unsigned int	ceiling;
 	unsigned int	floor;
 } t_textures;
