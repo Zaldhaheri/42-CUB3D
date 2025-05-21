@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:20:32 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/21 11:58:32 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:28:51 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	set_color(t_data *data, char *texture)
 	count = count_chars(texture, ',');
 	split_color = color_split(texture);
 	if (count != 2)
-		return (0);
+		return (free_darray(split_color), 0);
 	if (!split_color || !split_color[0] || !split_color[1] || !split_color[2]
 		|| split_color[3])
 		return (printf("Error\nInvalid color iden\n"), 0);
@@ -121,11 +121,11 @@ int	texture_n_colors(t_data *data, char **f_data)
 			continue ;
 		if (set_texture(data, split) == -1)
 			(printf("Error\nFailed to set texture: %s\n", split[0]),
-				free_darray(split), free(data->mlx), exit(1));
+				free_darray(split), free(data->mlx), free_darray(f_data), free_all(data), exit(1));
 		if ((!ft_strcmp(split[0], "F") || !ft_strcmp(split[0], "C"))
 			&& !set_color(data, f_data[index]))
 			(printf("Error\nFailed to set color: %s\n", split[0]),
-				free_darray(split), free(data->mlx), free_all(data), exit(1));
+				free_darray(split), free(data->mlx), free_darray(f_data), free_all(data), exit(1));
 	}
 	return (free_darray(split), 0);
 }

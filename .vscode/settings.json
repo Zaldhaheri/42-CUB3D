@@ -9,6 +9,7 @@
 		"string": "c",
 		"string_view": "c",
 		"vector": "c",
-		"ostream": "c"
+		"ostream": "c",
+		"iterator": "c"
 	}
 }

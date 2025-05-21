@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 14:22:11 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/20 19:52:23 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:39:01 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,10 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 
-char				*gnl_strchr(const char *str, int c);
-char				*gnl_strdup(const char *str);
-size_t				gnl_strlen(const char *str);
-char				*gnl_strjoin(char const *s1, char const *s2);
-char				*gnl_substr(char const *s, unsigned int start, size_t len);
 char				*get_next_line(int fd);
-
+size_t				gnl_strlen(const char *str);
+size_t				get_line_len(char *buffer);
+char				*gnl_strchr(const char *s, int c);
+char				*gnl_strjoin(char *s1, char *s2);
+void				*malloc_buf(char **pbfr, size_t mal_size);
 #endif

@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:13:53 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/21 12:02:23 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:59:37 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,13 @@ int	check_walls(t_data *data)
 		jindex = -1;
 		while (++jindex < width)
 			if (ft_strchr("0NSEWD", data->map[index][jindex])
-				&& (!index || index + 1 == height || !jindex
+			&& (!index || index + 1 == height || !jindex
 				|| jindex + 1 == width
 				|| !ft_strchr("WESN10D", data->map[index - 1][jindex])
 				|| !ft_strchr("WESN10D", data->map[index + 1][jindex])
 				|| !ft_strchr("WESN10D", data->map[index][jindex - 1])
 				|| !ft_strchr("WESN10D", data->map[index][jindex + 1])))
-				return (printf("Error\nMap is not enclosed by walls\n"),
-					free_all(data), -1);
+				return(printf("Error\nMap is not enclosed by walls\n"), -1);
 	}
 	return (0);
 }
