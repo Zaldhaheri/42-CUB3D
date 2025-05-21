@@ -6,7 +6,7 @@
 /*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:13:53 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/20 15:14:30 by mbabayan         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:56:14 by mbabayan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int	check_walls(t_data *data)
 				|| !ft_strchr("WESN10D", data->map[index + 1][jindex])
 				|| !ft_strchr("WESN10D", data->map[index][jindex - 1])
 				|| !ft_strchr("WESN10D", data->map[index][jindex + 1])))
-				return (printf("Error\nMap is not enclosed by walls\n"),
-					free_darray(data->map), -1);
+				return (printf("Error\nMap is not enclosed by walls\n"), -1);
 	}
 	return (0);
 }
