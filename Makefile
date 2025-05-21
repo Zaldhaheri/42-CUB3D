@@ -1,11 +1,10 @@
 NAME = cub3D
 
 SRCS = $(SRCDIR)/main.c $(SRCDIR)/game.c $(SRCDIR)/hooks.c $(SRCDIR)/hooks_move.c $(SRCDIR)/raycast.c $(SRCDIR)/raycast2.c $(SRCDIR)/content_check.c $(SRCDIR)/map.c $(SRCDIR)/parse.c $(SRCDIR)/texturing_check.c $(SRCDIR)/utils_2.c $(SRCDIR)/map_helpers.c $(SRCDIR)/texture_helpers.c \
-		#$(SRCDIR)/free_all.c
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra
 
 OS:= ${shell uname}
 ifeq (${OS},Darwin)

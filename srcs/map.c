@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:14:52 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/20 17:26:36 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:58:52 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int	parse_map(t_data *data, char **content, int i)
 			return (-1);
 	}
 	if (player != 1)
-		printf("Error: There must be exactly one player in the map.\n");
+		printf("Error\nThere must be exactly one player in the map.\n");
 	if (player != 1 || create_map(data, content)
 		|| check_walls(data))
 		return (-1);

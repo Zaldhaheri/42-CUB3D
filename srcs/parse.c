@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:27:03 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/21 15:56:40 by mbabayan         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:59:01 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	parse(char *path, t_data *data)
 		return (free_darray(content), -1);
 	index = find_start(content);
 	if (index == -1)
-		printf("Error: No valid map found in the file.\n");
+		printf("Error\nNo valid map found in the file.\n");
 	if (index == -1 || parse_map(data, content + index, index) == -1)
 		return (free_all(data), free_darray(content), -1);
 	free_darray(content);
