@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 14:22:11 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/21 16:23:39 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:11:07 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <stdint.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
