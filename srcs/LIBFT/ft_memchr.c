@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbabayan <mbabayan@student.42abudhabi.ae>  +#+  +:+       +#+        */
+/*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:05:54 by mbabayan          #+#    #+#             */
-/*   Updated: 2023/11/08 17:38:16 by mbabayan         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:51:58 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 /*
  * function locates the first occurrence of c in string s, until n bytes.
  */
-void	*ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *str, int c, size_t n)
 {
-	size_t	index;
+	unsigned char	*ptr;
+	size_t			i;
 
-	index = 0;
-	while (index < n)
+	i = 0;
+	ptr = (unsigned char *)str;
+	while (i < n)
 	{
-		if (((unsigned char *)s)[index] == (unsigned char)c)
-			return ((void *)&s[index]);
-		index++;
+		if (ptr[i] == (unsigned char) c)
+			return ((void *)(ptr + i));
+		i++;
 	}
-	return (0);
+	return (NULL);
 }

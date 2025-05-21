@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:12:28 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/20 17:36:28 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:59:48 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 
 # define ROT_SPEED 0.1
 # define MOVE_SPEED 0.1
-# define COLLISION_MARGIN 0.25
+# define COLLISION_MARGIN 0.3
 
 /*
 	Structs
@@ -172,5 +172,7 @@ void	move_forward(t_data *data, t_player *plr);
 void	move_backward(t_data *data, t_player *plr);
 void	move_left(t_data *data, t_player *plr);
 void	move_right(t_data *data, t_player *plr);
+
+void free_all(t_data *data);
 
 #endif
