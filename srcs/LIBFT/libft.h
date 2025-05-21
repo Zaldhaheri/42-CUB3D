@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 14:22:11 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/21 14:12:33 by mbabayan         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:55:59 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,7 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
-
-char				*get_next_line(int fd);
-
+char *get_next_line(int fd);
 size_t				gnl_strlen(const char *str);
 size_t				get_line_len(char *buffer);
 char				*gnl_strchr(const char *s, int c);
