@@ -6,12 +6,11 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:09:12 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/21 15:54:32 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:22:31 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 size_t	gnl_strlen(const char *str)
 {

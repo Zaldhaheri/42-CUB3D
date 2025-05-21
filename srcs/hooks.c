@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:17:48 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/20 19:27:09 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/21 16:09:12 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	look_right(t_player *plr)
 
 int	hook_exit(t_data *data)
 {
-	printf("Window exit\n");
+	free_all(data);
 	mlx_destroy_window(data->mlx, data->win);
 	exit(0);
 }
@@ -73,6 +73,7 @@ int	hook_keys(int key, t_data *data)
 {
 	if (key == 53)
 	{
+		free_all(data);
 		mlx_destroy_window(data->mlx, data->win);
 		exit(0);
 	}
@@ -88,7 +89,5 @@ int	hook_keys(int key, t_data *data)
 		move_backward(data, data->plr);
 	else if (key == 2)
 		move_right(data, data->plr);
-	else
-		printf("%d\n", key);
 	return (0);
 }
