@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:20:32 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/20 20:07:53 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/21 11:58:32 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int	texture_n_colors(t_data *data, char **f_data)
 		if ((!ft_strcmp(split[0], "F") || !ft_strcmp(split[0], "C"))
 			&& !set_color(data, f_data[index]))
 			(printf("Error\nFailed to set color: %s\n", split[0]),
-				free_darray(split), free(data->mlx), exit(1));
+				free_darray(split), free(data->mlx), free_all(data), exit(1));
 	}
 	return (free_darray(split), 0);
 }

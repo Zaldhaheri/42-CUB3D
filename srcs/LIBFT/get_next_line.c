@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:20:01 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/16 15:52:35 by mbabayan         ###   ########.fr       */
+/*   Updated: 2025/05/21 11:40:59 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ char	*trim_line(char *line)
 	char	*str;
 
 	i = 0;
-	while (line[i] != '\0' && line[i] != '\n')
-		i++;
-	if (line[i] == '\0' || line[1] == '\0')
+	if (!line || line[0] == '\0' || line[1]== '\0')
 		return (NULL);
-	str = ft_substr(line, i + 1, ft_strlen(line));
-	if (*str == '\0')
+	while (line[i] && line[i] != '\n')
+		i++;
+	if (line[i] == '\0')
+		return (NULL);
+	str = ft_substr(line, i + 1, ft_strlen(line + i + 1));
+	if (!str || *str == '\0')
 	{
 		free(str);
 		return (NULL);

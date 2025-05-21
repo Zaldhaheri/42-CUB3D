@@ -6,11 +6,22 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:03:05 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/20 20:12:20 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/21 11:56:34 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	free_all(t_data *data)
+{
+	if (data->plr)
+		free(data->plr);
+	if (data->line)
+		free(data->line);
+	if (data->map)
+		free_darray(data->map);
+	
+}
 
 int	main(int argc, char **argv)
 {
@@ -28,5 +39,6 @@ int	main(int argc, char **argv)
 		return (free(data.mlx), -1);
 	init(&data);
 	game_start(&data);
+	free_all(&data);
 	return (0);
 }

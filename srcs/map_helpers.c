@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_helpers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:13:53 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/20 15:14:30 by mbabayan         ###   ########.fr       */
+/*   Updated: 2025/05/21 12:02:23 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	check_walls(t_data *data)
 				|| !ft_strchr("WESN10D", data->map[index][jindex - 1])
 				|| !ft_strchr("WESN10D", data->map[index][jindex + 1])))
 				return (printf("Error\nMap is not enclosed by walls\n"),
-					free_darray(data->map), -1);
+					free_all(data), -1);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:12:28 by zaldhahe          #+#    #+#             */
-/*   Updated: 2025/05/20 19:42:18 by zaldhahe         ###   ########.fr       */
+/*   Updated: 2025/05/21 11:59:04 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,4 +173,5 @@ void	move_backward(t_data *data, t_player *plr);
 void	move_left(t_data *data, t_player *plr);
 void	move_right(t_data *data, t_player *plr);
 
+void	free_all(t_data *data);
 #endif

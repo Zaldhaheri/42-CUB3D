@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   content_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbabayan <mbabayan@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: zaldhahe <zaldhahe@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:12:40 by mbabayan          #+#    #+#             */
-/*   Updated: 2025/05/20 15:13:28 by mbabayan         ###   ########.fr       */
+/*   Updated: 2025/05/21 11:50:55 by zaldhahe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	validate_content(char **f_data)
 	while (f_data[++index])
 	{
 		t_line = ft_strtrim(f_data[index], " \t\n");
+		if (!t_line)
+			continue;
 		if (t_line[0] && check_flags(t_line, flags) < 0)
 			return (free(t_line), -1);
 		free(t_line);
