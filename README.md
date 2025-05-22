@@ -1,2 +1,0 @@
-# CUB3D
-BLOCKS

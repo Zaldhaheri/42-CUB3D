@@ -1,0 +1,14 @@
+NO ./texturesLand/n.xpm
+
+SO ./texturesLand/s.xpm moe
+
+WE ./texturesLand/w.xpm
+
+EA ./texturesLand/e.xpm
+
+F 80,130,300
+C -1.-2,-3
+
+111
+1N1
+111
